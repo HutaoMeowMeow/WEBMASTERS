@@ -229,15 +229,17 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
+  const statValues = { "stat-championships": null, "stat-players": null, "stat-divisions": null, "stat-victories": null };
+
   async function loadStats() {
     try {
       const unsub = onSnapshot(doc(db, "stats", "main"), snap => {
         if (snap.exists()) {
           const data = snap.data();
-          updateStatCounter("stat-championships", data.championships);
-          updateStatCounter("stat-players", data.players);
-          updateStatCounter("stat-divisions", data.divisions);
-          updateStatCounter("stat-victories", data.victories);
+          applyStat("stat-championships", data.championships);
+          applyStat("stat-players", data.players);
+          applyStat("stat-divisions", data.divisions);
+          applyStat("stat-victories", data.victories);
         }
       });
       return unsub;
@@ -246,12 +248,16 @@
     }
   }
 
-  function updateStatCounter(id, val) {
+  function applyStat(id, val) {
     const el = document.getElementById(id);
     if (!el) return;
     const num = Number(val) || 0;
+    statValues[id] = num;
     el.setAttribute("data-target", String(num));
-    el.textContent = num;
+    el.textContent = "0";
+    if (typeof window.__animateStat === "function" && window.__statVisibleIds && window.__statVisibleIds.has(id)) {
+      window.__animateStat(id);
+    }
   }
 
   function escapeHtml(str) {

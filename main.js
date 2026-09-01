@@ -98,30 +98,42 @@ revealElements.forEach(el => revealObserver.observe(el));
 
 // Animated Counters
 const counters = document.querySelectorAll(".stat-counter");
+const visibleStatIds = new Set();
+window.__statVisibleIds = visibleStatIds;
 const counterObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
+    const counter = entry.target;
+    const id = counter.id;
     if (entry.isIntersecting) {
-      const counter = entry.target;
-      const target = parseInt(counter.getAttribute("data-target"));
-      const duration = 2000;
-      const start = performance.now();
-
-      function updateCounter(currentTime) {
-        const elapsed = currentTime - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const easeOut = 1 - Math.pow(1 - progress, 3);
-        counter.textContent = Math.floor(easeOut * target);
-        if (progress < 1) {
-          requestAnimationFrame(updateCounter);
-        } else {
-          counter.textContent = target;
-        }
-      }
-      requestAnimationFrame(updateCounter);
-      counterObserver.unobserve(counter);
+      visibleStatIds.add(id);
+      animateStat(id);
+    } else {
+      visibleStatIds.delete(id);
     }
   });
 }, { threshold: 0.5 });
+
+function animateStat(id) {
+  const counter = document.getElementById(id);
+  if (!counter) return;
+  const target = parseInt(counter.getAttribute("data-target")) || 0;
+  const duration = 2000;
+  const start = performance.now();
+
+  function updateCounter(currentTime) {
+    const elapsed = currentTime - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const easeOut = 1 - Math.pow(1 - progress, 3);
+    counter.textContent = Math.floor(easeOut * target);
+    if (progress < 1) {
+      requestAnimationFrame(updateCounter);
+    } else {
+      counter.textContent = target;
+    }
+  }
+  requestAnimationFrame(updateCounter);
+}
+window.__animateStat = animateStat;
 
 counters.forEach(counter => counterObserver.observe(counter));
 
