@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Webmasters Esports Banilad</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="crest.png" sizes="32x32">
+<link rel="icon" type="image/png" href="crest.png" sizes="96x96">
+<link rel="apple-touch-icon" type="image/png" href="crest.png">
+<meta name="theme-color" content="#050814">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .field{
+    background: rgba(255,255,255,0.03);
+    border:1px solid var(--border-line);
+    color: var(--white);
+  }
+  .field:focus{ outline:none; border-color: var(--cyan); }
+  .thumb{ aspect-ratio: 1/1; object-fit: contain; background: rgba(0,0,0,0.25); }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- LOGIN VIEW -->
+<div id="login-view" class="min-h-screen flex items-center justify-center px-6">
+  <div class="panel clip-角 p-8 w-full max-w-sm">
+    <div class="flex items-center gap-3 mb-6">
+      <img src="crest.png" alt="Webmasters Esports crest" class="h-9 w-9 object-contain">
+      <div>
+        <p class="font-display text-sm text-white">ADMIN</p>
+        <p class="font-body text-[11px] text-[color:var(--cyan)]">Webmasters Esports Banilad</p>
+      </div>
+    </div>
+    <form id="login-form" class="space-y-4">
+      <div>
+        <label class="font-body text-xs text-[color:var(--chrome)]">Email</label>
+        <input id="email" type="email" required class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+      </div>
+      <div>
+        <label class="font-body text-xs text-[color:var(--chrome)]">Password</label>
+        <input id="password" type="password" required class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+      </div>
+      <p id="login-error" class="font-body text-xs text-red-400 hidden"></p>
+      <button type="submit" class="btn-primary font-display text-xs tracking-wide px-5 py-3 clip-角 w-full">LOG IN</button>
+    </form>
+  </div>
+</div>
+
+<!-- ADMIN VIEW -->
+<div id="admin-view" class="hidden min-h-screen">
+  <header class="border-b border-[color:var(--border-line)]">
+    <div class="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between relative">
+      <div class="flex items-center gap-3">
+        <img src="crest.png" alt="Webmasters Esports crest" class="h-9 w-9 object-contain">
+        <p class="font-display text-sm text-white tracking-wide">GALLERY ADMIN</p>
+      </div>
+      <div class="flex items-center gap-4">
+        <span id="user-email" class="font-body text-xs text-[color:var(--chrome)]"></span>
+        <button id="logout-btn" class="btn-ghost font-display text-xs tracking-wide px-4 py-2 clip-角">LOG OUT</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-6 py-12">
+
+    <div class="panel clip-角 p-7 mb-10">
+      <h2 class="font-display text-lg text-white mb-5">Edit stats</h2>
+      <form id="stats-form" class="space-y-4">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div>
+            <label class="font-body text-xs text-[color:var(--chrome)]">Championships Won</label>
+            <input id="stat-championships" type="number" required min="0" class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+          </div>
+          <div>
+            <label class="font-body text-xs text-[color:var(--chrome)]">Active Players</label>
+            <input id="stat-players" type="number" required min="0" class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+          </div>
+          <div>
+            <label class="font-body text-xs text-[color:var(--chrome)]">Divisions Fielded</label>
+            <input id="stat-divisions" type="number" required min="0" class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+          </div>
+          <div>
+            <label class="font-body text-xs text-[color:var(--chrome)]">Tournament Victories</label>
+            <input id="stat-victories" type="number" required min="0" class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <button type="submit" class="btn-primary font-display text-xs tracking-wide px-6 py-3 clip-角">SAVE STATS</button>
+          <span id="stats-status-msg" class="font-body text-xs text-[color:var(--chrome)]"></span>
+        </div>
+      </form>
+    </div>
+
+    <div class="panel clip-角 p-7 mb-10">
+      <h2 class="font-display text-lg text-white mb-5">Add a match</h2>
+      <form id="match-form" class="space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="font-body text-xs text-[color:var(--chrome)]">Date & Time</label>
+            <input id="match-datetime" type="datetime-local" required class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+          </div>
+          <div>
+            <label class="font-body text-xs text-[color:var(--chrome)]">Status</label>
+            <select id="match-status" required class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+              <option value="Upcoming">Upcoming</option>
+              <option value="Live">Live</option>
+              <option value="Finished">Finished</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="font-body text-xs text-[color:var(--chrome)]">Match title</label>
+          <input id="match-title" type="text" required maxlength="120" placeholder="Webmasters vs Talisay Ironclad — Valorant" class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="font-body text-xs text-[color:var(--chrome)]">Link URL (optional)</label>
+            <input id="match-link" type="url" class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+          </div>
+          <div>
+            <label class="font-body text-xs text-[color:var(--chrome)]">Link text</label>
+            <input id="match-link-text" type="text" placeholder="Watch stream →" class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <button type="submit" class="btn-primary font-display text-xs tracking-wide px-6 py-3 clip-角">ADD MATCH</button>
+          <span id="match-status-msg" class="font-body text-xs text-[color:var(--chrome)]"></span>
+        </div>
+      </form>
+    </div>
+
+    <h2 class="font-display text-lg text-white mb-5">Manage matches</h2>
+    <div id="match-list" class="panel clip-角 divide-y divide-[color:var(--border-line)] mb-10">
+      <p class="font-body text-sm px-6 py-4">Loading…</p>
+    </div>
+
+    <div class="panel clip-角 p-7 mb-10">
+      <h2 class="font-display text-lg text-white mb-5">Post a photo</h2>
+      <form id="upload-form" class="space-y-4">
+        <div>
+          <label class="font-body text-xs text-[color:var(--chrome)]">Image file</label>
+          <input id="file-input" type="file" accept="image/*" required class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+        </div>
+        <div>
+          <label class="font-body text-xs text-[color:var(--chrome)]">Caption (optional)</label>
+          <input id="caption-input" type="text" maxlength="120" placeholder="e.g. Scrim night before regionals" class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+        </div>
+        <div class="flex items-center gap-4">
+          <button type="submit" id="upload-btn" class="btn-primary font-display text-xs tracking-wide px-6 py-3 clip-角">POST PHOTO</button>
+          <span id="upload-status" class="font-body text-xs text-[color:var(--chrome)]"></span>
+        </div>
+      </form>
+    </div>
+
+    <h2 class="font-display text-lg text-white mb-5">Posted photos</h2>
+    <div id="photo-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+      <p class="font-body text-sm col-span-full">Loading…</p>
+    </div>
+
+    <div class="panel clip-角 p-7 mb-10 mt-10">
+      <h2 class="font-display text-lg text-white mb-5">Manage rosters</h2>
+      <form id="roster-form" class="space-y-4">
+        <input type="hidden" id="roster-id">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="font-body text-xs text-[color:var(--chrome)]">Game title</label>
+            <input id="roster-game" type="text" required maxlength="40" placeholder="VALORANT" class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm uppercase">
+          </div>
+          <div>
+            <label class="font-body text-xs text-[color:var(--chrome)]">Division</label>
+            <input id="roster-division" type="text" required maxlength="40" placeholder="Division A" class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+          </div>
+        </div>
+        <div>
+          <label class="font-body text-xs text-[color:var(--chrome)]">Player initials (comma separated)</label>
+          <input id="roster-players" type="text" required placeholder="RK, JN, CY, LM" class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="font-body text-xs text-[color:var(--chrome)]">Extra count (optional)</label>
+            <input id="roster-extra" type="text" placeholder="+1" class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+          </div>
+          <div>
+            <label class="font-body text-xs text-[color:var(--chrome)]">Regional Rank</label>
+            <input id="roster-rank" type="text" required placeholder="#3 Cebu" class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <button type="submit" class="btn-primary font-display text-xs tracking-wide px-6 py-3 clip-角">SAVE ROSTER</button>
+          <button type="button" id="roster-cancel" class="btn-ghost font-display text-xs tracking-wide px-6 py-3 clip-角 hidden">CANCEL</button>
+          <span id="roster-status-msg" class="font-body text-xs text-[color:var(--chrome)]"></span>
+        </div>
+      </form>
+    </div>
+
+    <h2 class="font-display text-lg text-white mb-5">Current rosters</h2>
+    <div id="roster-list" class="panel clip-角 divide-y divide-[color:var(--border-line)] mb-10">
+      <p class="font-body text-sm px-6 py-4">Loading…</p>
+    </div>
+
+    <div class="panel clip-角 p-7 mb-10">
+      <h2 class="font-display text-lg text-white mb-5">Manage achievements</h2>
+      <form id="achievement-form" class="space-y-4">
+        <input type="hidden" id="achievement-id">
+        <div>
+          <label class="font-body text-xs text-[color:var(--chrome)]">Achievement title</label>
+          <input id="achievement-title" type="text" required maxlength="120" placeholder="Regional Rank #3 Cebu" class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+        </div>
+        <div>
+          <label class="font-body text-xs text-[color:var(--chrome)]">Year</label>
+          <input id="achievement-year" type="text" required maxlength="10" placeholder="2026" class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+        </div>
+        <div>
+          <label class="font-body text-xs text-[color:var(--chrome)]">Image (optional)</label>
+          <input id="achievement-file" type="file" accept="image/*" class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+        </div>
+        <div class="flex items-center gap-4">
+          <button type="submit" class="btn-primary font-display text-xs tracking-wide px-6 py-3 clip-角">SAVE ACHIEVEMENT</button>
+          <button type="button" id="achievement-cancel" class="btn-ghost font-display text-xs tracking-wide px-6 py-3 clip-角 hidden">CANCEL</button>
+          <span id="achievement-status-msg" class="font-body text-xs text-[color:var(--chrome)]"></span>
+        </div>
+      </form>
+    </div>
+
+    <h2 class="font-display text-lg text-white mb-5">Achievements list</h2>
+    <div id="achievement-list" class="panel clip-角 divide-y divide-[color:var(--border-line)] mb-10">
+      <p class="font-body text-sm px-6 py-4">Loading…</p>
+    </div>
+
+    <div class="panel clip-角 p-7 mb-10">
+      <h2 class="font-display text-lg text-white mb-5">Manage events</h2>
+      <form id="event-form" class="space-y-4">
+        <input type="hidden" id="event-id">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="font-body text-xs text-[color:var(--chrome)]">Event title</label>
+            <input id="event-title" type="text" required maxlength="120" placeholder="Webmasters vs Talisay Ironclad — Valorant" class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+          </div>
+          <div>
+            <label class="font-body text-xs text-[color:var(--chrome)]">Date & Time</label>
+            <input id="event-datetime" type="datetime-local" required class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="font-body text-xs text-[color:var(--chrome)]">Location (optional)</label>
+            <input id="event-location" type="text" placeholder="UC Banilad Gym" class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+          </div>
+          <div>
+            <label class="font-body text-xs text-[color:var(--chrome)]">Link URL (optional)</label>
+            <input id="event-link" type="url" class="field w-full mt-1 px-3 py-2.5 rounded-sm font-body text-sm">
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <button type="submit" class="btn-primary font-display text-xs tracking-wide px-6 py-3 clip-角">SAVE EVENT</button>
+          <button type="button" id="event-cancel" class="btn-ghost font-display text-xs tracking-wide px-6 py-3 clip-角 hidden">CANCEL</button>
+          <span id="event-status-msg" class="font-body text-xs text-[color:var(--chrome)]"></span>
+        </div>
+      </form>
+    </div>
+
+    <h2 class="font-display text-lg text-white mb-5">Events list</h2>
+    <div id="event-list" class="panel clip-角 divide-y divide-[color:var(--border-line)] mb-10">
+      <p class="font-body text-sm px-6 py-4">Loading…</p>
+    </div>
+
+  </main>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import {
+    getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
+  } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+  import { getFirestore, collection, addDoc, deleteDoc, doc, query, orderBy, getDocs, serverTimestamp, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import { firebaseConfig } from "./firebase-config.js";
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  const loginView = document.getElementById("login-view");
+  const adminView = document.getElementById("admin-view");
+  const loginForm = document.getElementById("login-form");
+  const loginError = document.getElementById("login-error");
+  const logoutBtn = document.getElementById("logout-btn");
+  const userEmailEl = document.getElementById("user-email");
+  const uploadForm = document.getElementById("upload-form");
+  const uploadBtn = document.getElementById("upload-btn");
+  const uploadStatus = document.getElementById("upload-status");
+  const photoGrid = document.getElementById("photo-grid");
+  const matchForm = document.getElementById("match-form");
+  const matchStatusMsg = document.getElementById("match-status-msg");
+  const matchList = document.getElementById("match-list");
+  const statsForm = document.getElementById("stats-form");
+  const statsStatusMsg = document.getElementById("stats-status-msg");
+  const rosterForm = document.getElementById("roster-form");
+  const rosterStatusMsg = document.getElementById("roster-status-msg");
+  const rosterList = document.getElementById("roster-list");
+  const rosterCancel = document.getElementById("roster-cancel");
+  const achievementForm = document.getElementById("achievement-form");
+  const achievementStatusMsg = document.getElementById("achievement-status-msg");
+  const achievementList = document.getElementById("achievement-list");
+  const achievementCancel = document.getElementById("achievement-cancel");
+  const eventForm = document.getElementById("event-form");
+  const eventStatusMsg = document.getElementById("event-status-msg");
+  const eventList = document.getElementById("event-list");
+  const eventCancel = document.getElementById("event-cancel");
+
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      loginView.classList.add("hidden");
+      adminView.classList.remove("hidden");
+      userEmailEl.textContent = user.email;
+      loadPhotos();
+      loadMatches();
+      loadStats();
+      loadRosters();
+      loadAchievements();
+      loadEvents();
+    } else {
+      loginView.classList.add("hidden");
+      adminView.classList.add("hidden");
+    }
+  });
+
+  loginForm.addEventListener("submit", async e => {
+    e.preventDefault();
+    loginError.classList.add("hidden");
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (err) {
+      const code = err?.code || "unknown";
+      loginError.textContent = "Login failed (" + code + ") — check your email and password.";
+      loginError.classList.remove("hidden");
+      console.error("Login error:", err);
+    }
+  });
+
+  logoutBtn.addEventListener("click", () => signOut(auth));
+
+  matchForm.addEventListener("submit", async e => {
+    e.preventDefault();
+    matchStatusMsg.textContent = "";
+    const datetime = document.getElementById("match-datetime").value;
+    const title = document.getElementById("match-title").value.trim();
+    const status = document.getElementById("match-status").value;
+    const link = document.getElementById("match-link").value.trim();
+    const linkText = document.getElementById("match-link-text").value.trim();
+
+    try {
+      await addDoc(collection(db, "matches"), {
+        datetime,
+        title,
+        status,
+        link: link || "",
+        linkText: linkText || "",
+        createdAt: serverTimestamp()
+      });
+      matchStatusMsg.textContent = "Match added!";
+      matchForm.reset();
+      loadMatches();
+    } catch (err) {
+      console.error(err);
+      matchStatusMsg.textContent = "Failed to add match — try again.";
+    } finally {
+      setTimeout(() => (matchStatusMsg.textContent = ""), 3000);
+    }
+  });
+
+  statsForm.addEventListener("submit", async e => {
+    e.preventDefault();
+    statsStatusMsg.textContent = "";
+    const data = {
+      championships: Number(document.getElementById("stat-championships").value) || 0,
+      players: Number(document.getElementById("stat-players").value) || 0,
+      divisions: Number(document.getElementById("stat-divisions").value) || 0,
+      victories: Number(document.getElementById("stat-victories").value) || 0,
+    };
+
+    try {
+      await setDoc(doc(db, "stats", "main"), data, { merge: true });
+      statsStatusMsg.textContent = "Stats saved!";
+    } catch (err) {
+      console.error(err);
+      statsStatusMsg.textContent = "Failed to save stats — try again.";
+    } finally {
+      setTimeout(() => (statsStatusMsg.textContent = ""), 3000);
+    }
+  });
+
+  rosterForm.addEventListener("submit", async e => {
+    e.preventDefault();
+    rosterStatusMsg.textContent = "";
+    const id = document.getElementById("roster-id").value.trim();
+    const game = document.getElementById("roster-game").value.trim().toUpperCase();
+    const division = document.getElementById("roster-division").value.trim();
+    const playersRaw = document.getElementById("roster-players").value.trim();
+    const players = playersRaw.split(",").map(s => s.trim()).filter(Boolean);
+    const extra = document.getElementById("roster-extra").value.trim();
+    const rank = document.getElementById("roster-rank").value.trim();
+
+    if (!game || !division || !players.length || !rank) {
+      rosterStatusMsg.textContent = "Please fill in all required fields.";
+      return;
+    }
+
+    try {
+      const data = { game, division, players, extra, rank };
+      if (id) {
+        await setDoc(doc(db, "rosters", id), data, { merge: true });
+        rosterStatusMsg.textContent = "Roster updated!";
+      } else {
+        await addDoc(collection(db, "rosters"), data);
+        rosterStatusMsg.textContent = "Roster added!";
+      }
+      rosterForm.reset();
+      document.getElementById("roster-id").value = "";
+      rosterCancel.classList.add("hidden");
+      loadRosters();
+    } catch (err) {
+      console.error(err);
+      rosterStatusMsg.textContent = "Failed to save roster — try again.";
+    } finally {
+      setTimeout(() => (rosterStatusMsg.textContent = ""), 3000);
+    }
+  });
+
+  rosterCancel.addEventListener("click", () => {
+    rosterForm.reset();
+    document.getElementById("roster-id").value = "";
+    rosterCancel.classList.add("hidden");
+    rosterStatusMsg.textContent = "";
+  });
+
+  achievementForm.addEventListener("submit", async e => {
+    e.preventDefault();
+    achievementStatusMsg.textContent = "";
+    const id = document.getElementById("achievement-id").value.trim();
+    const title = document.getElementById("achievement-title").value.trim();
+    const year = document.getElementById("achievement-year").value.trim();
+    const fileInput = document.getElementById("achievement-file");
+
+    if (!title || !category || !year) {
+      achievementStatusMsg.textContent = "Please fill in all required fields.";
+      return;
+    }
+
+    try {
+      const data = { title, year };
+      const file = fileInput.files[0];
+      if (file) {
+        const imageData = await compressImage(file, 1000, 0.72);
+        data.imageData = imageData;
+      }
+      if (id) {
+        await setDoc(doc(db, "achievements", id), data, { merge: true });
+        achievementStatusMsg.textContent = "Achievement updated!";
+      } else {
+        await addDoc(collection(db, "achievements"), data);
+        achievementStatusMsg.textContent = "Achievement added!";
+      }
+      achievementForm.reset();
+      document.getElementById("achievement-id").value = "";
+      achievementCancel.classList.add("hidden");
+      loadAchievements();
+    } catch (err) {
+      console.error(err);
+      achievementStatusMsg.textContent = "Failed to save achievement — try again.";
+    } finally {
+      setTimeout(() => (achievementStatusMsg.textContent = ""), 3000);
+    }
+  });
+
+  achievementCancel.addEventListener("click", () => {
+    achievementForm.reset();
+    document.getElementById("achievement-id").value = "";
+    achievementCancel.classList.add("hidden");
+    achievementStatusMsg.textContent = "";
+  });
+
+  eventForm.addEventListener("submit", async e => {
+    e.preventDefault();
+    eventStatusMsg.textContent = "";
+    const id = document.getElementById("event-id").value.trim();
+    const title = document.getElementById("event-title").value.trim();
+    const datetime = document.getElementById("event-datetime").value;
+    const location = document.getElementById("event-location").value.trim();
+    const link = document.getElementById("event-link").value.trim();
+
+    if (!title || !datetime) {
+      eventStatusMsg.textContent = "Please fill in all required fields.";
+      return;
+    }
+
+    try {
+      const data = { title, datetime, location, link };
+      if (id) {
+        await setDoc(doc(db, "events", id), data, { merge: true });
+        eventStatusMsg.textContent = "Event updated!";
+      } else {
+        await addDoc(collection(db, "events"), data);
+        eventStatusMsg.textContent = "Event added!";
+      }
+      eventForm.reset();
+      document.getElementById("event-id").value = "";
+      eventCancel.classList.add("hidden");
+      loadEvents();
+    } catch (err) {
+      console.error(err);
+      eventStatusMsg.textContent = "Failed to save event — try again.";
+    } finally {
+      setTimeout(() => (eventStatusMsg.textContent = ""), 3000);
+    }
+  });
+
+  eventCancel.addEventListener("click", () => {
+    eventForm.reset();
+    document.getElementById("event-id").value = "";
+    eventCancel.classList.add("hidden");
+    eventStatusMsg.textContent = "";
+  });
+
+  uploadForm.addEventListener("submit", async e => {
+    e.preventDefault();
+    const file = document.getElementById("file-input").files[0];
+    const caption = document.getElementById("caption-input").value.trim();
+    if (!file) return;
+
+    uploadBtn.disabled = true;
+    uploadStatus.textContent = "Uploading…";
+
+    try {
+      const imageData = await compressImage(file, 1000, 0.72);
+
+      // Firestore documents cap at 1MB total. Leave headroom for other fields.
+      if (imageData.length > 900000) {
+        uploadStatus.textContent = "Image still too large after compression — try a smaller photo.";
+        uploadBtn.disabled = false;
+        return;
+      }
+
+      await addDoc(collection(db, "gallery"), {
+        imageData,
+        caption,
+        createdAt: serverTimestamp()
+      });
+
+      uploadStatus.textContent = "Posted!";
+      uploadForm.reset();
+      loadPhotos();
+    } catch (err) {
+      console.error(err);
+      uploadStatus.textContent = "Upload failed — try again.";
+    } finally {
+      uploadBtn.disabled = false;
+      setTimeout(() => (uploadStatus.textContent = ""), 3000);
+    }
+  });
+
+  // Resizes an image to maxDimension on its longest side and re-encodes it
+  // as a compressed JPEG data URL, so it fits comfortably inside a Firestore document.
+  function compressImage(file, maxDimension, quality) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const reader = new FileReader();
+      reader.onload = e => (img.src = e.target.result);
+      reader.onerror = reject;
+      img.onload = () => {
+        let { width, height } = img;
+        if (width > height && width > maxDimension) {
+          height = Math.round(height * (maxDimension / width));
+          width = maxDimension;
+        } else if (height > maxDimension) {
+          width = Math.round(width * (maxDimension / height));
+          height = maxDimension;
+        }
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL("image/jpeg", quality));
+      };
+      img.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function loadPhotos() {
+    photoGrid.innerHTML = '<p class="font-body text-sm col-span-full">Loading…</p>';
+    const q = query(collection(db, "gallery"), orderBy("createdAt", "desc"));
+    const snap = await getDocs(q);
+
+    if (snap.empty) {
+      photoGrid.innerHTML = '<p class="font-body text-sm col-span-full">No photos posted yet.</p>';
+      return;
+    }
+
+    photoGrid.innerHTML = "";
+    snap.forEach(docSnap => {
+      const { imageData, caption } = docSnap.data();
+      const card = document.createElement("div");
+      card.className = "panel clip-角 overflow-hidden";
+      card.innerHTML = `
+        <img src="${imageData}" alt="${caption ? caption.replace(/"/g, '&quot;') : 'Gallery photo'}" class="thumb w-full">
+        <div class="p-3">
+          <p class="font-body text-xs text-[color:var(--chrome)] truncate">${caption || "No caption"}</p>
+          <button data-id="${docSnap.id}" class="delete-btn font-body text-[11px] text-red-400 hover:text-red-300 transition mt-2">Delete</button>
+        </div>`;
+      photoGrid.appendChild(card);
+    });
+
+    document.querySelectorAll(".delete-btn").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        if (!confirm("Delete this photo?")) return;
+        try {
+          await deleteDoc(doc(db, "gallery", btn.dataset.id));
+        } catch (err) {
+          console.error(err);
+        }
+        loadPhotos();
+      });
+    });
+  }
+
+  async function loadMatches() {
+    matchList.innerHTML = '<p class="font-body text-sm px-6 py-4">Loading…</p>';
+    const q = query(collection(db, "matches"), orderBy("datetime", "asc"));
+    const snap = await getDocs(q);
+
+    if (snap.empty) {
+      matchList.innerHTML = '<p class="font-body text-sm px-6 py-4">No matches scheduled yet.</p>';
+      return;
+    }
+
+    matchList.innerHTML = "";
+    snap.forEach(docSnap => {
+      const data = docSnap.data();
+      const row = document.createElement("div");
+        row.className = "grid grid-cols-[auto_1fr_auto_auto] sm:grid-cols-[140px_1fr_140px_auto] items-center gap-4 px-6 py-4 schedule-row";
+      row.innerHTML = `
+        <div class="font-body text-sm text-[color:var(--chrome)]">${formatDate(data.datetime)}</div>
+        <div class="font-display text-white text-sm sm:text-base">${escapeHtml(data.title)}</div>
+        <div class="flex items-center gap-2 font-body text-xs">
+          ${statusDot(data.status)}
+          <span class="${statusColor(data.status)}">${escapeHtml(data.status)}</span>
+        </div>
+        <button data-id="${docSnap.id}" class="delete-match font-body text-[11px] text-red-400 hover:text-red-300 transition">Delete</button>`;
+      matchList.appendChild(row);
+    });
+
+    document.querySelectorAll(".delete-match").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        if (!confirm("Delete this match?")) return;
+        try {
+          await deleteDoc(doc(db, "matches", btn.dataset.id));
+        } catch (err) {
+          console.error(err);
+        }
+        loadMatches();
+      });
+    });
+  }
+
+  async function loadStats() {
+    try {
+      const snap = await getDocs(doc(db, "stats", "main"));
+      if (snap.exists()) {
+        const data = snap.data();
+        document.getElementById("stat-championships").value = data.championships ?? 0;
+        document.getElementById("stat-players").value = data.players ?? 0;
+        document.getElementById("stat-divisions").value = data.divisions ?? 0;
+        document.getElementById("stat-victories").value = data.victories ?? 0;
+      }
+    } catch (err) {
+      console.error("Failed to load stats:", err);
+    }
+  }
+
+  async function loadRosters() {
+    rosterList.innerHTML = '<p class="font-body text-sm px-6 py-4">Loading…</p>';
+    const q = query(collection(db, "rosters"), orderBy("game", "asc"));
+    const snap = await getDocs(q);
+
+    if (snap.empty) {
+      rosterList.innerHTML = '<p class="font-body text-sm px-6 py-4">No rosters added yet.</p>';
+      return;
+    }
+
+    rosterList.innerHTML = "";
+    snap.forEach(docSnap => {
+      const data = docSnap.data();
+      const row = document.createElement("div");
+      row.className = "grid grid-cols-[1fr_auto_auto] sm:grid-cols-[140px_1fr_auto_auto] items-center gap-4 px-6 py-4 roster-admin-row";
+      row.innerHTML = `
+        <div class="font-display text-white text-sm">${escapeHtml(data.game || "")}</div>
+        <div class="font-body text-sm text-[color:var(--chrome)]">${escapeHtml(data.division || "")} · ${(data.players || []).length} players</div>
+        <button data-id="${docSnap.id}" class="edit-roster font-body text-[11px] text-[color:var(--cyan)] hover:text-white transition">Edit</button>
+        <button data-id="${docSnap.id}" class="delete-roster font-body text-[11px] text-red-400 hover:text-red-300 transition">Delete</button>`;
+      rosterList.appendChild(row);
+    });
+
+    document.querySelectorAll(".edit-roster").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        const snap = await getDocs(doc(db, "rosters", btn.dataset.id));
+        if (!snap.exists()) return;
+        const data = snap.data();
+        document.getElementById("roster-id").value = btn.dataset.id;
+        document.getElementById("roster-game").value = data.game || "";
+        document.getElementById("roster-division").value = data.division || "";
+        document.getElementById("roster-players").value = (data.players || []).join(", ");
+        document.getElementById("roster-extra").value = data.extra || "";
+        document.getElementById("roster-rank").value = data.rank || "";
+        rosterCancel.classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
+
+    document.querySelectorAll(".delete-roster").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        if (!confirm("Delete this roster?")) return;
+        try {
+          await deleteDoc(doc(db, "rosters", btn.dataset.id));
+        } catch (err) {
+          console.error(err);
+        }
+        loadRosters();
+      });
+    });
+  }
+
+  function formatDate(val) {
+    if (!val) return "";
+    const d = new Date(val);
+    if (isNaN(d)) return val;
+    return d.toLocaleString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  function statusDot(status) {
+    const map = { "Live": "bg-red-500", "Upcoming": "bg-[color:var(--cyan)]", "Finished": "bg-[color:var(--chrome)]" };
+    const color = map[status] || "bg-[color:var(--chrome)]";
+    return `<span class="h-2 w-2 rounded-full ${color} status-dot"></span>`;
+  }
+
+  function statusColor(status) {
+    const map = { "Live": "text-red-400", "Upcoming": "text-[color:var(--cyan)]", "Finished": "text-[color:var(--chrome)]" };
+    return map[status] || "text-[color:var(--chrome)]";
+  }
+
+  async function loadAchievements() {
+    achievementList.innerHTML = '<p class="font-body text-sm px-6 py-4">Loading…</p>';
+    const q = query(collection(db, "achievements"), orderBy("year", "desc"));
+    const snap = await getDocs(q);
+
+    if (snap.empty) {
+      achievementList.innerHTML = '<p class="font-body text-sm px-6 py-4">No achievements added yet.</p>';
+      return;
+    }
+
+    achievementList.innerHTML = "";
+    snap.forEach(docSnap => {
+      const data = docSnap.data();
+      const row = document.createElement("div");
+      row.className = "grid grid-cols-[1fr_auto_auto] sm:grid-cols-[140px_1fr_auto_auto] items-center gap-4 px-6 py-4";
+      const thumbHtml = data.imageData ? `<img src="${data.imageData}" class="h-10 w-10 rounded object-cover border border-[color:var(--border-line)]" alt="">` : "";
+      row.innerHTML = `
+        <div class="font-display text-white text-sm">${escapeHtml(data.title || "")}</div>
+        <div class="font-body text-sm text-[color:var(--chrome)]">${escapeHtml(data.year || "")} ${thumbHtml}</div>
+        <button data-id="${docSnap.id}" class="edit-achievement font-body text-[11px] text-[color:var(--cyan)] hover:text-white transition">Edit</button>
+        <button data-id="${docSnap.id}" class="delete-achievement font-body text-[11px] text-red-400 hover:text-red-300 transition">Delete</button>`;
+      achievementList.appendChild(row);
+    });
+
+    document.querySelectorAll(".edit-achievement").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        const snap = await getDocs(doc(db, "achievements", btn.dataset.id));
+        if (!snap.exists()) return;
+        const data = snap.data();
+        document.getElementById("achievement-id").value = btn.dataset.id;
+        document.getElementById("achievement-title").value = data.title || "";
+        document.getElementById("achievement-year").value = data.year || "";
+        achievementCancel.classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
+
+    document.querySelectorAll(".delete-achievement").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        if (!confirm("Delete this achievement?")) return;
+        try {
+          await deleteDoc(doc(db, "achievements", btn.dataset.id));
+        } catch (err) {
+          console.error(err);
+        }
+        loadAchievements();
+      });
+    });
+  }
+
+  async function loadEvents() {
+    eventList.innerHTML = '<p class="font-body text-sm px-6 py-4">Loading…</p>';
+    const q = query(collection(db, "events"), orderBy("datetime", "asc"));
+    const snap = await getDocs(q);
+
+    if (snap.empty) {
+      eventList.innerHTML = '<p class="font-body text-sm px-6 py-4">No events added yet.</p>';
+      return;
+    }
+
+    eventList.innerHTML = "";
+    snap.forEach(docSnap => {
+      const data = docSnap.data();
+      const row = document.createElement("div");
+      row.className = "grid grid-cols-[1fr_auto_auto] sm:grid-cols-[140px_1fr_auto_auto] items-center gap-4 px-6 py-4";
+      row.innerHTML = `
+        <div class="font-display text-white text-sm">${escapeHtml(data.title || "")}</div>
+        <div class="font-body text-sm text-[color:var(--chrome)]">${formatDate(data.datetime)}${data.location ? " · " + escapeHtml(data.location) : ""}</div>
+        <button data-id="${docSnap.id}" class="edit-event font-body text-[11px] text-[color:var(--cyan)] hover:text-white transition">Edit</button>
+        <button data-id="${docSnap.id}" class="delete-event font-body text-[11px] text-red-400 hover:text-red-300 transition">Delete</button>`;
+      eventList.appendChild(row);
+    });
+
+    document.querySelectorAll(".edit-event").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        const snap = await getDocs(doc(db, "events", btn.dataset.id));
+        if (!snap.exists()) return;
+        const data = snap.data();
+        document.getElementById("event-id").value = btn.dataset.id;
+        document.getElementById("event-title").value = data.title || "";
+        document.getElementById("event-datetime").value = data.datetime || "";
+        document.getElementById("event-location").value = data.location || "";
+        document.getElementById("event-link").value = data.link || "";
+        eventCancel.classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
+
+    document.querySelectorAll(".delete-event").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        if (!confirm("Delete this event?")) return;
+        try {
+          await deleteDoc(doc(db, "events", btn.dataset.id));
+        } catch (err) {
+          console.error(err);
+        }
+        loadEvents();
+      });
+    });
+  }
+</script>
+
+</body>
+</html>
