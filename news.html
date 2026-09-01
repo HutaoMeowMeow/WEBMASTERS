@@ -17,9 +17,15 @@
 </head>
 <body class="antialiased">
 
+<!-- Scanlines -->
+<div class="scanlines"></div>
+
+<!-- Particles -->
+<canvas id="particles"></canvas>
+
 <!-- NAV -->
 <header class="fixed top-0 inset-x-0 z-50">
-  <div class="border-b border-[color:var(--border-line)]" style="background:rgba(5,8,20,0.75); backdrop-filter:blur(16px);">
+  <div class="border-b border-[color:var(--border-line)]" style="background:rgba(5,8,20,0.85); backdrop-filter:blur(16px);">
     <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between relative">
       <a href="index.html" class="flex items-center gap-3 shrink-0">
         <img src="crest.png" alt="Webmasters Esports crest" class="h-11 w-11 object-contain">
@@ -53,10 +59,10 @@
   </div>
 </header>
 
-<!-- GALLERY -->
+<!-- GALLERY / MEDIA -->
 <section id="news" class="relative py-24 px-6 lg:px-10 border-t border-[color:var(--border-line)]">
   <div class="max-w-7xl mx-auto">
-    <div class="mb-12">
+    <div class="mb-12 reveal">
       <h2 class="font-display text-3xl md:text-4xl font-bold text-white">Gallery</h2>
       <p class="font-body text-sm mt-2 max-w-md">Scrims, tournament days and behind-the-scenes moments from the org.</p>
     </div>
@@ -74,7 +80,7 @@
 <!-- ACHIEVEMENTS -->
 <section id="achievements" class="relative py-24 px-6 lg:px-10 border-t border-[color:var(--border-line)]">
   <div class="max-w-7xl mx-auto">
-    <div class="mb-12">
+    <div class="mb-12 reveal">
       <h2 class="font-display text-3xl md:text-4xl font-bold text-white">Achievements</h2>
       <p class="font-body text-sm mt-2 max-w-md">Our org's milestones, championships, and tournament victories.</p>
     </div>
@@ -87,11 +93,11 @@
 <!-- NEXT EVENT -->
 <section id="next-event" class="relative py-24 px-6 lg:px-10 border-t border-[color:var(--border-line)]">
   <div class="max-w-7xl mx-auto">
-    <div class="mb-12">
+    <div class="mb-12 reveal">
       <h2 class="font-display text-3xl md:text-4xl font-bold text-white">Next Event</h2>
       <p class="font-body text-sm mt-2 max-w-md">Our upcoming match or event — be there.</p>
     </div>
-    <div id="next-event-card" class="panel clip-角 p-8 max-w-3xl">
+    <div id="next-event-card" class="panel clip-角 p-8 max-w-3xl reveal">
       <p class="font-body text-sm text-[color:var(--chrome)]">Loading next event…</p>
     </div>
   </div>
@@ -119,6 +125,7 @@
         <li><a href="teams.html" class="hover:text-white transition-colors">Teams</a></li>
         <li><a href="matches.html" class="hover:text-white transition-colors">Matches</a></li>
         <li><a href="news.html" class="hover:text-white transition-colors">News</a></li>
+        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
       </ul>
     </div>
     <div>
@@ -198,8 +205,6 @@
     if (e.key === "Escape") closeLightbox();
   });
 
-  loadGallery();
-
   async function loadAchievements() {
     const grid = document.getElementById("achievements-grid");
     grid.innerHTML = '<p class="font-body text-sm col-span-full">Loading achievements…</p>';
@@ -210,7 +215,7 @@
       snap.forEach(docSnap => {
         const data = docSnap.data();
         const card = document.createElement("div");
-        card.className = "roster-card panel clip-角 overflow-hidden";
+        card.className = "achievement-card roster-card panel clip-角 overflow-hidden";
         const imageHtml = data.imageData ? `<img src="${data.imageData}" alt="${escapeHtml(data.title || "")}" class="w-full aspect-video object-contain bg-black/20">` : "";
         card.innerHTML = `
           ${imageHtml}
@@ -218,7 +223,8 @@
             <p class="font-display text-lg text-white mb-2">${escapeHtml(data.title || "")}</p>
             <div class="flex items-center gap-3 font-body text-xs text-[color:var(--chrome)]">
               <span>${escapeHtml(data.year || "")}</span>
-            </div>`;
+            </div>
+          </div>`;
         grid.appendChild(card);
       });
       if (snap.empty) {
@@ -278,6 +284,16 @@
     link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
   });
 </script>
+
+<!-- Achievement Modal -->
+<div id="achievement-modal" class="modal-overlay">
+  <div class="modal-content clip-角 p-8">
+    <button id="achievement-modal-close" class="absolute top-4 right-4 text-white/80 hover:text-white font-display text-xs tracking-wide px-3 py-2 z-10">CLOSE</button>
+    <div id="achievement-modal-body"></div>
+  </div>
+</div>
+
+<script src="main.js"></script>
 
 </body>
 </html>

@@ -17,9 +17,15 @@
 </head>
 <body class="antialiased">
 
+<!-- Scanlines -->
+<div class="scanlines"></div>
+
+<!-- Particles -->
+<canvas id="particles"></canvas>
+
 <!-- NAV -->
 <header class="fixed top-0 inset-x-0 z-50">
-  <div class="border-b border-[color:var(--border-line)]" style="background:rgba(5,8,20,0.75); backdrop-filter:blur(16px);">
+  <div class="border-b border-[color:var(--border-line)]" style="background:rgba(5,8,20,0.85); backdrop-filter:blur(16px);">
     <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between relative">
       <a href="index.html" class="flex items-center gap-3 shrink-0">
         <img src="crest.png" alt="Webmasters Esports crest" class="h-11 w-11 object-contain">
@@ -53,16 +59,23 @@
   </div>
 </header>
 
-<!-- SCHEDULE -->
+<!-- MATCH CENTER -->
 <section id="schedule" class="relative py-24 px-6 lg:px-10 border-t border-[color:var(--border-line)]">
   <div class="max-w-7xl mx-auto">
-    <div class="mb-12">
-      <h2 class="font-display text-3xl md:text-4xl font-bold text-white">Match Schedule</h2>
-      <p class="font-body text-sm mt-2 max-w-md">Where and when to catch the Webmasters this month.</p>
+    <div class="text-center mb-12 reveal">
+      <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">MATCH CENTER</h2>
+      <p class="font-body text-base text-[color:var(--chrome)] max-w-2xl mx-auto">Where and when to catch the Webmasters this month.</p>
     </div>
 
-    <div id="schedule-list" class="panel clip-角 divide-y divide-[color:var(--border-line)]">
-      <p class="font-body text-sm px-6 py-4">Loading…</p>
+    <div class="flex flex-wrap items-center justify-center gap-3 mb-10 reveal">
+      <button class="filter-btn active font-display text-xs tracking-wide px-5 py-2.5 clip-角 border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all" data-filter="all">ALL</button>
+      <button class="filter-btn font-display text-xs tracking-wide px-5 py-2.5 clip-角 border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all" data-filter="valorant">VALORANT</button>
+      <button class="filter-btn font-display text-xs tracking-wide px-5 py-2.5 clip-角 border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all" data-filter="mlbb">MLBB</button>
+      <button class="filter-btn font-display text-xs tracking-wide px-5 py-2.5 clip-角 border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all" data-filter="lol">LOL</button>
+    </div>
+
+    <div id="schedule-list" class="space-y-4">
+      <p class="font-body text-sm text-center">Loading…</p>
     </div>
 
   </div>
@@ -85,6 +98,7 @@
         <li><a href="teams.html" class="hover:text-white transition-colors">Teams</a></li>
         <li><a href="matches.html" class="hover:text-white transition-colors">Matches</a></li>
         <li><a href="news.html" class="hover:text-white transition-colors">News</a></li>
+        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
       </ul>
     </div>
     <div>
@@ -110,35 +124,57 @@
   const db = getFirestore(app);
   const scheduleList = document.getElementById("schedule-list");
 
-  async function loadSchedule() {
-    scheduleList.innerHTML = '<p class="font-body text-sm px-6 py-4">Loading…</p>';
+  function getGameFilter(title) {
+    if (!title) return "all";
+    const t = title.toLowerCase();
+    if (t.includes("valorant")) return "valorant";
+    if (t.includes("mobile") || t.includes("mlbb")) return "mlbb";
+    if (t.includes("league") || t.includes("lol")) return "lol";
+    return "all";
+  }
+
+  async function loadSchedule(filter = "all") {
+    scheduleList.innerHTML = '<p class="font-body text-sm text-center">Loading…</p>';
     try {
       const q = query(collection(db, "matches"), orderBy("datetime", "asc"));
       const snap = await getDocs(q);
+      scheduleList.innerHTML = "";
+      const filtered = snap.docs.filter(doc => {
+        const data = doc.data();
+        const gameFilter = getGameFilter(data.title);
+        return filter === "all" || gameFilter === filter;
+      });
 
-      if (snap.empty) {
-        scheduleList.innerHTML = '<p class="font-body text-sm px-6 py-4">No matches scheduled yet — check back soon.</p>';
+      if (filtered.length === 0) {
+        scheduleList.innerHTML = '<p class="font-body text-sm text-center">No matches found for this filter.</p>';
         return;
       }
 
-      scheduleList.innerHTML = "";
-      snap.forEach(doc => {
+      filtered.forEach(doc => {
         const { title, datetime, status, link, linkText } = doc.data();
         const row = document.createElement("div");
-        row.className = "grid grid-cols-[auto_1fr_auto_auto] sm:grid-cols-[140px_1fr_140px_auto] items-center gap-4 px-6 py-5 schedule-row";
+        const gameFilter = getGameFilter(title);
+        let statusClass = "";
+        if (status === "Live") statusClass = "match-live";
+        else if (status === "Upcoming") statusClass = "match-upcoming";
+        else if (status === "Finished") statusClass = "match-finished";
+
+        row.className = `match-card panel clip-角 p-5 md:p-6 ${statusClass} reveal`;
         row.innerHTML = `
-          <div class="font-body text-sm text-[color:var(--chrome)]">${formatDate(datetime)}</div>
-          <div class="font-display text-white text-sm sm:text-base">${escapeHtml(title)}</div>
-          <div class="flex items-center gap-2 font-body text-xs">
-            ${statusDot(status)}
-            <span class="${statusColor(status)}">${escapeHtml(status)}</span>
-          </div>
-          <a href="${escapeHtml(link || "#")}" class="font-body text-xs text-[color:var(--cyan)] hover:text-white transition">${escapeHtml(linkText || "Link")} →</a>`;
+          <div class="grid grid-cols-1 md:grid-cols-[140px_1fr_140px_auto] items-center gap-4">
+            <div class="font-body text-sm text-[color:var(--chrome)]">${formatDate(datetime)}</div>
+            <div class="font-display text-white text-sm md:text-base">${escapeHtml(title)}</div>
+            <div class="flex items-center gap-2 font-body text-xs">
+              ${statusDot(status)}
+              <span class="${statusColor(status)}">${escapeHtml(status)}</span>
+            </div>
+            <a href="${escapeHtml(link || "#")}" class="font-body text-xs text-[color:var(--cyan)] hover:text-white transition">${escapeHtml(linkText || "Link")} →</a>
+          </div>`;
         scheduleList.appendChild(row);
       });
     } catch (err) {
       console.error("Schedule failed to load:", err);
-      scheduleList.innerHTML = '<p class="font-body text-sm px-6 py-4">Couldn\'t load matches right now.</p>';
+      scheduleList.innerHTML = '<p class="font-body text-sm text-center">Couldn\'t load matches right now.</p>';
     }
   }
 
@@ -166,6 +202,14 @@
 
   loadSchedule();
 
+  document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active", "border-[color:var(--cyan)]", "text-white"));
+      btn.classList.add("active", "border-[color:var(--cyan)]", "text-white");
+      loadSchedule(btn.dataset.filter);
+    });
+  });
+
   const mobileMenuBtn = document.getElementById("mobile-menu-btn");
   const mobileMenu = document.getElementById("mobile-menu");
   mobileMenuBtn.addEventListener("click", () => {
@@ -175,6 +219,8 @@
     link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
   });
 </script>
+
+<script src="main.js"></script>
 
 </body>
 </html>

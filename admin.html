@@ -449,7 +449,7 @@
     const year = document.getElementById("achievement-year").value.trim();
     const fileInput = document.getElementById("achievement-file");
 
-    if (!title || !category || !year) {
+    if (!title || !year) {
       achievementStatusMsg.textContent = "Please fill in all required fields.";
       return;
     }
@@ -860,6 +860,16 @@
     });
   }
 </script>
+
+<!-- Achievement Modal -->
+<div id="achievement-modal" class="modal-overlay">
+  <div class="modal-content clip-角 p-8">
+    <button id="achievement-modal-close" class="absolute top-4 right-4 text-white/80 hover:text-white font-display text-xs tracking-wide px-3 py-2 z-10">CLOSE</button>
+    <div id="achievement-modal-body"></div>
+  </div>
+</div>
+
+<script src="main.js"></script>
 
 </body>
 </html>

@@ -17,9 +17,15 @@
 </head>
 <body class="antialiased">
 
+<!-- Scanlines -->
+<div class="scanlines"></div>
+
+<!-- Particles -->
+<canvas id="particles"></canvas>
+
 <!-- NAV -->
 <header class="fixed top-0 inset-x-0 z-50">
-  <div class="border-b border-[color:var(--border-line)]" style="background:rgba(5,8,20,0.75); backdrop-filter:blur(16px);">
+  <div class="border-b border-[color:var(--border-line)]" style="background:rgba(5,8,20,0.85); backdrop-filter:blur(16px);">
     <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between relative">
       <a href="index.html" class="flex items-center gap-3 shrink-0">
         <img src="crest.png" alt="Webmasters Esports crest" class="h-11 w-11 object-contain">
@@ -54,68 +60,109 @@
 </header>
 
 <!-- HERO -->
-<section id="home" class="relative min-h-screen flex items-center overflow-hidden pt-20">
+<section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
   <div class="absolute inset-0 grid-overlay opacity-40"></div>
   <div class="absolute inset-0 glow-radial"></div>
+  <div class="absolute inset-0 hero-gradient"></div>
   <div class="streak" style="left:12%; top:-10%; height:55%; transform:rotate(14deg);"></div>
   <div class="streak" style="right:18%; top:5%; height:70%; transform:rotate(-10deg); opacity:0.6;"></div>
   <div class="streak" style="right:8%; bottom:-5%; height:40%; transform:rotate(18deg); opacity:0.4;"></div>
 
-  <div class="relative max-w-5xl mx-auto px-6 text-center fade-in" id="top">
-    <img src="crest.png" alt="Webmasters Esports Banilad crest" class="mx-auto h-32 md:h-40 w-auto object-contain mb-8" style="filter: drop-shadow(0 0 40px rgba(0,163,255,0.45));">
+  <div class="relative max-w-6xl mx-auto px-6 text-center z-10 fade-in" id="top">
+    <div class="mb-8 relative inline-block">
+      <img src="crest.png" alt="Webmasters Esports Banilad crest" class="mx-auto h-28 md:h-36 w-auto object-contain" style="filter: drop-shadow(0 0 60px rgba(0,163,255,0.5));">
+      <div class="absolute -inset-4 bg-[color:var(--cyan)] opacity-10 blur-3xl rounded-full"></div>
+    </div>
 
-    <h1 class="font-display font-black text-white leading-[0.95] text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight">
-      WEBMASTERS<br>ESPORTS BANILAD
+    <h1 class="font-display font-black leading-[0.9] text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight mb-6">
+      <span class="hero-title">WEBMASTERS</span><br>
+      <span class="text-[color:var(--chrome)] text-3xl sm:text-4xl md:text-5xl tracking-[0.3em] mt-2 block">ESPORTS BANILAD</span>
     </h1>
 
-    <p class="font-body text-[color:var(--chrome)] text-base md:text-lg mt-6 max-w-xl mx-auto">
+    <p class="font-display text-sm sm:text-base text-[color:var(--cyan)] tracking-[0.5em] mb-8 uppercase">
+      Compete. Conquer. Represent.
+    </p>
+
+    <p class="font-body text-[color:var(--chrome)] text-base md:text-lg mt-2 max-w-2xl mx-auto mb-10">
       The official esports organization of the University of Cebu – Banilad, competing across Valorant, Mobile Legends and League of Legends.
     </p>
 
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10">
-      <a href="teams.html" class="btn-primary font-display text-sm tracking-wide px-8 py-3.5 clip-角 w-full sm:w-auto text-center">
-        EXPLORE ROSTERS
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
+      <a href="teams.html" class="btn-primary font-display text-sm tracking-wide px-10 py-4 clip-角 w-full sm:w-auto text-center">
+        MEET THE TEAMS
       </a>
-      <a href="matches.html" class="btn-ghost font-display text-sm tracking-wide px-8 py-3.5 clip-角 w-full sm:w-auto text-center hover:bg-white/5 transition">
-        WATCH LIVE
+      <a href="#achievements" class="btn-ghost font-display text-sm tracking-wide px-10 py-4 clip-角 w-full sm:w-auto text-center hover:bg-white/5 transition">
+        VIEW ACHIEVEMENTS
       </a>
     </div>
   </div>
 
-  <div class="absolute bottom-8 inset-x-0 flex justify-center">
-    <div class="w-px h-14 bg-gradient-to-b from-transparent via-[color:var(--cyan)] to-transparent opacity-70"></div>
+  <div class="absolute bottom-8 inset-x-0 flex justify-center z-10">
+    <a href="#rosters" class="text-[color:var(--chrome)] hover:text-white transition-colors">
+      <div class="w-px h-14 bg-gradient-to-b from-transparent via-[color:var(--cyan)] to-transparent opacity-70"></div>
+    </a>
   </div>
 </section>
 
 <!-- STATS -->
 <section class="relative py-20 px-6 lg:px-10 border-t border-[color:var(--border-line)]">
   <div class="absolute inset-0 glow-radial opacity-60"></div>
-  <div class="relative max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-    <div>
-      <p class="font-display text-4xl md:text-5xl font-bold text-[color:var(--cyan)] num-glow" id="stat-championships">7</p>
-      <p class="font-body text-xs tracking-wide mt-2 text-[color:var(--chrome)]">Championships Won</p>
+  <div class="relative max-w-7xl mx-auto">
+    <div class="text-center mb-12 reveal">
+      <h2 class="font-display text-2xl md:text-3xl font-bold text-white mb-3">BY THE NUMBERS</h2>
+      <p class="font-body text-sm text-[color:var(--chrome)]">Our legacy in numbers</p>
     </div>
-    <div>
-      <p class="font-display text-4xl md:text-5xl font-bold text-[color:var(--cyan)] num-glow" id="stat-players">42</p>
-      <p class="font-body text-xs tracking-wide mt-2 text-[color:var(--chrome)]">Active Players</p>
-    </div>
-    <div>
-      <p class="font-display text-4xl md:text-5xl font-bold text-[color:var(--cyan)] num-glow" id="stat-divisions">3</p>
-      <p class="font-body text-xs tracking-wide mt-2 text-[color:var(--chrome)]">Divisions Fielded</p>
-    </div>
-    <div>
-      <p class="font-display text-4xl md:text-5xl font-bold text-[color:var(--cyan)] num-glow" id="stat-victories">18</p>
-      <p class="font-body text-xs tracking-wide mt-2 text-[color:var(--chrome)]">Tournament Victories</p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      <div class="reveal reveal-delay-1">
+        <p id="stat-championships" class="font-display text-4xl md:text-5xl font-bold text-[color:var(--cyan)] num-glow stat-counter" data-target="7">0</p>
+        <p class="font-body text-xs tracking-wide mt-2 text-[color:var(--chrome)]">Championships Won</p>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <p id="stat-players" class="font-display text-4xl md:text-5xl font-bold text-[color:var(--cyan)] num-glow stat-counter" data-target="42">0</p>
+        <p class="font-body text-xs tracking-wide mt-2 text-[color:var(--chrome)]">Active Players</p>
+      </div>
+      <div class="reveal reveal-delay-3">
+        <p id="stat-divisions" class="font-display text-4xl md:text-5xl font-bold text-[color:var(--cyan)] num-glow stat-counter" data-target="3">0</p>
+        <p class="font-body text-xs tracking-wide mt-2 text-[color:var(--chrome)]">Divisions Fielded</p>
+      </div>
+      <div class="reveal reveal-delay-4">
+        <p id="stat-victories" class="font-display text-4xl md:text-5xl font-bold text-[color:var(--cyan)] num-glow stat-counter" data-target="18">0</p>
+        <p class="font-body text-xs tracking-wide mt-2 text-[color:var(--chrome)]">Tournament Victories</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ACHIEVEMENTS -->
-<section id="achievements" class="relative py-24 px-6 lg:px-10 border-t border-[color:var(--border-line)]">
+<div class="section-divider"></div>
+
+<!-- ROSTERS PREVIEW -->
+<section id="rosters" class="relative py-24 px-6 lg:px-10">
   <div class="max-w-7xl mx-auto">
-    <div class="mb-12">
-      <h2 class="font-display text-3xl md:text-4xl font-bold text-white">Achievements</h2>
-      <p class="font-body text-sm mt-2 max-w-md">Our org's milestones, championships, and tournament victories.</p>
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12 reveal">
+      <div>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-white">Active Rosters</h2>
+        <p class="font-body text-sm mt-2 max-w-md">Three divisions, one crest. Meet the squads carrying the Webmasters name into competition this split.</p>
+      </div>
+      <a href="teams.html" class="btn-ghost font-display text-xs tracking-wide px-6 py-3 clip-角 w-full sm:w-auto text-center">VIEW ALL TEAMS</a>
+    </div>
+
+    <div id="rosters-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <p class="font-body text-sm col-span-full">Loading rosters…</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="relative py-24 px-6 lg:px-10">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12 reveal">
+      <div>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-white">Achievements</h2>
+        <p class="font-body text-sm mt-2 max-w-md">Our org's milestones, championships, and tournament victories.</p>
+      </div>
+      <a href="news.html" class="btn-ghost font-display text-xs tracking-wide px-6 py-3 clip-角 w-full sm:w-auto text-center">VIEW ALL</a>
     </div>
     <div id="achievements-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <p class="font-body text-sm col-span-full">Loading achievements…</p>
@@ -123,18 +170,22 @@
   </div>
 </section>
 
+<div class="section-divider"></div>
+
 <!-- NEXT EVENT -->
-<section id="next-event" class="relative py-24 px-6 lg:px-10 border-t border-[color:var(--border-line)]">
+<section id="next-event" class="relative py-24 px-6 lg:px-10">
   <div class="max-w-7xl mx-auto">
-    <div class="mb-12">
+    <div class="mb-12 reveal">
       <h2 class="font-display text-3xl md:text-4xl font-bold text-white">Next Event</h2>
       <p class="font-body text-sm mt-2 max-w-md">Our upcoming match or event — be there.</p>
     </div>
-    <div id="next-event-card" class="panel clip-角 p-8 max-w-3xl">
+    <div id="next-event-card" class="panel clip-角 p-8 max-w-3xl reveal">
       <p class="font-body text-sm text-[color:var(--chrome)]">Loading next event…</p>
     </div>
   </div>
 </section>
+
+<div class="section-divider"></div>
 
 <!-- FOOTER -->
 <footer id="about" class="relative border-t border-[color:var(--border-line)] px-6 lg:px-10 pt-16 pb-8">
@@ -153,6 +204,7 @@
         <li><a href="teams.html" class="hover:text-white transition-colors">Teams</a></li>
         <li><a href="matches.html" class="hover:text-white transition-colors">Matches</a></li>
         <li><a href="news.html" class="hover:text-white transition-colors">News</a></li>
+        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
       </ul>
     </div>
     <div>
@@ -182,10 +234,10 @@
       const unsub = onSnapshot(doc(db, "stats", "main"), snap => {
         if (snap.exists()) {
           const data = snap.data();
-          setText("stat-championships", data.championships);
-          setText("stat-players", data.players);
-          setText("stat-divisions", data.divisions);
-          setText("stat-victories", data.victories);
+          updateStatCounter("stat-championships", data.championships);
+          updateStatCounter("stat-players", data.players);
+          updateStatCounter("stat-divisions", data.divisions);
+          updateStatCounter("stat-victories", data.victories);
         }
       });
       return unsub;
@@ -194,9 +246,12 @@
     }
   }
 
-  function setText(id, val) {
+  function updateStatCounter(id, val) {
     const el = document.getElementById(id);
-    if (el) el.textContent = val ?? "";
+    if (!el) return;
+    const num = Number(val) || 0;
+    el.setAttribute("data-target", String(num));
+    el.textContent = num;
   }
 
   function escapeHtml(str) {
@@ -210,6 +265,44 @@
     return d.toLocaleString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
   }
 
+  async function loadRosters() {
+    const grid = document.getElementById("rosters-grid");
+    grid.innerHTML = '<p class="font-body text-sm col-span-full">Loading rosters…</p>';
+    try {
+      const q = query(collection(db, "rosters"), orderBy("game", "asc"));
+      const snap = await getDocs(q);
+      grid.innerHTML = "";
+      snap.forEach(docSnap => {
+        const data = docSnap.data();
+        const card = document.createElement("div");
+        card.className = "roster-card panel clip-角 p-7";
+        const playersHtml = (data.players || []).map(p =>
+          `<div class="h-11 w-11 rounded-full bg-gradient-to-br from-[#0f2540] to-[#132c4e] border-2 border-[#050814] flex items-center justify-center font-display text-xs text-white">${escapeHtml(p)}</div>`
+        ).join("");
+        const extraHtml = data.extra ? `<div class="h-11 w-11 rounded-full bg-[#0a1626] border-2 border-[#050814] flex items-center justify-center font-body text-[11px] text-[color:var(--chrome)]">${escapeHtml(data.extra)}</div>` : "";
+        card.innerHTML = `
+          <div class="flex items-center justify-between mb-6">
+            <h3 class="font-display text-lg text-white tracking-wide">${escapeHtml(data.game || "")}</h3>
+            <span class="font-body text-[11px] px-2.5 py-1 rounded-sm border border-[color:var(--border-line)] text-[color:var(--cyan)]">${escapeHtml(data.division || "")}</span>
+          </div>
+          <div class="flex -space-x-3 mb-6">
+            ${playersHtml}${extraHtml}
+          </div>
+          <div class="flex items-center justify-between font-body text-sm">
+            <span>Regional Rank</span>
+            <span class="text-[color:var(--cyan)] font-semibold">${escapeHtml(data.rank || "")}</span>
+          </div>`;
+        grid.appendChild(card);
+      });
+      if (snap.empty) {
+        grid.innerHTML = '<p class="font-body text-sm col-span-full">No rosters posted yet.</p>';
+      }
+    } catch (err) {
+      console.error("Rosters failed to load:", err);
+      grid.innerHTML = '<p class="font-body text-sm col-span-full">Couldn\'t load rosters right now.</p>';
+    }
+  }
+
   async function loadAchievements() {
     const grid = document.getElementById("achievements-grid");
     grid.innerHTML = '<p class="font-body text-sm col-span-full">Loading achievements…</p>';
@@ -220,7 +313,7 @@
       snap.forEach(docSnap => {
         const data = docSnap.data();
         const card = document.createElement("div");
-        card.className = "roster-card panel clip-角 overflow-hidden";
+        card.className = "achievement-card roster-card panel clip-角 overflow-hidden";
         const imageHtml = data.imageData ? `<img src="${data.imageData}" alt="${escapeHtml(data.title || "")}" class="w-full aspect-video object-contain bg-black/20">` : "";
         card.innerHTML = `
           ${imageHtml}
@@ -228,7 +321,8 @@
             <p class="font-display text-lg text-white mb-2">${escapeHtml(data.title || "")}</p>
             <div class="flex items-center gap-3 font-body text-xs text-[color:var(--chrome)]">
               <span>${escapeHtml(data.year || "")}</span>
-            </div>`;
+            </div>
+          </div>`;
         grid.appendChild(card);
       });
       if (snap.empty) {
@@ -265,6 +359,7 @@
   }
 
   loadStats();
+  loadRosters();
   loadAchievements();
   loadNextEvent();
 
@@ -277,6 +372,16 @@
     link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
   });
 </script>
+
+<!-- Achievement Modal -->
+<div id="achievement-modal" class="modal-overlay">
+  <div class="modal-content clip-角 p-8">
+    <button id="achievement-modal-close" class="absolute top-4 right-4 text-white/80 hover:text-white font-display text-xs tracking-wide px-3 py-2 z-10">CLOSE</button>
+    <div id="achievement-modal-body"></div>
+  </div>
+</div>
+
+<script src="main.js"></script>
 
 </body>
 </html>

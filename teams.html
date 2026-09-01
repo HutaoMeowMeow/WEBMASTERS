@@ -17,9 +17,15 @@
 </head>
 <body class="antialiased">
 
+<!-- Scanlines -->
+<div class="scanlines"></div>
+
+<!-- Particles -->
+<canvas id="particles"></canvas>
+
 <!-- NAV -->
 <header class="fixed top-0 inset-x-0 z-50">
-  <div class="border-b border-[color:var(--border-line)]" style="background:rgba(5,8,20,0.75); backdrop-filter:blur(16px);">
+  <div class="border-b border-[color:var(--border-line)]" style="background:rgba(5,8,20,0.85); backdrop-filter:blur(16px);">
     <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between relative">
       <a href="index.html" class="flex items-center gap-3 shrink-0">
         <img src="crest.png" alt="Webmasters Esports crest" class="h-11 w-11 object-contain">
@@ -56,15 +62,13 @@
 <!-- ROSTERS -->
 <section id="rosters" class="relative py-24 px-6 lg:px-10">
   <div class="max-w-7xl mx-auto">
-    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12">
-      <div>
-        <h2 class="font-display text-3xl md:text-4xl font-bold text-white">Active Rosters</h2>
-        <p class="font-body text-sm mt-2 max-w-md">Three divisions, one crest. Meet the squads carrying the Webmasters name into competition this split.</p>
-      </div>
+    <div class="text-center mb-16 reveal">
+      <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">ACTIVE ROSTERS</h2>
+      <p class="font-body text-base text-[color:var(--chrome)] max-w-2xl mx-auto">Three divisions, one crest. Meet the squads carrying the Webmasters name into competition this split.</p>
     </div>
 
-    <div id="rosters-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <p class="font-body text-sm col-span-full">Loading rosters…</p>
+    <div id="rosters-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <p class="font-body text-sm col-span-full text-center">Loading rosters…</p>
     </div>
   </div>
 </section>
@@ -86,6 +90,7 @@
         <li><a href="teams.html" class="hover:text-white transition-colors">Teams</a></li>
         <li><a href="matches.html" class="hover:text-white transition-colors">Matches</a></li>
         <li><a href="news.html" class="hover:text-white transition-colors">News</a></li>
+        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
       </ul>
     </div>
     <div>
@@ -120,7 +125,12 @@
       snap.forEach(docSnap => {
         const data = docSnap.data();
         const card = document.createElement("div");
-        card.className = "roster-card panel clip-角 p-7";
+        const gameLower = (data.game || "").toLowerCase();
+        let themeClass = "";
+        if (gameLower.includes("valorant")) themeClass = "division-valorant";
+        else if (gameLower.includes("mobile") || gameLower.includes("mlbb")) themeClass = "division-mlbb";
+        else if (gameLower.includes("league") || gameLower.includes("lol")) themeClass = "division-lol";
+        card.className = `roster-card panel clip-角 p-7 ${themeClass}`;
         const playersHtml = (data.players || []).map(p =>
           `<div class="h-11 w-11 rounded-full bg-gradient-to-br from-[#0f2540] to-[#132c4e] border-2 border-[#050814] flex items-center justify-center font-display text-xs text-white">${escapeHtml(p)}</div>`
         ).join("");
@@ -140,11 +150,11 @@
         grid.appendChild(card);
       });
       if (snap.empty) {
-        grid.innerHTML = '<p class="font-body text-sm col-span-full">No rosters posted yet.</p>';
+        grid.innerHTML = '<p class="font-body text-sm col-span-full text-center">No rosters posted yet.</p>';
       }
     } catch (err) {
       console.error("Rosters failed to load:", err);
-      grid.innerHTML = '<p class="font-body text-sm col-span-full">Couldn\'t load rosters right now.</p>';
+      grid.innerHTML = '<p class="font-body text-sm col-span-full text-center">Couldn\'t load rosters right now.</p>';
     }
   }
 
@@ -163,6 +173,8 @@
     link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
   });
 </script>
+
+<script src="main.js"></script>
 
 </body>
 </html>
