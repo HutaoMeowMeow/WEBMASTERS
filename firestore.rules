@@ -1,0 +1,160 @@
+rules_version = '2';
+
+// =============================================================
+// WEBMASTERS ESPORTS — Firestore Security Rules
+// -------------------------------------------------------------
+// Goal:
+//   • Anyone (signed-out) can READ public site content.
+//   • Only authorized ADMIN users can WRITE.
+//   • Clients cannot create, edit, or delete arbitrary accounts.
+//   • All writes are size-bounded to prevent abuse.
+//
+// How to grant admin access to a user:
+//   1. User creates an account via Firebase Auth (email/password).
+//   2. Operator manually writes their uid into /admins/{uid} in the
+//      Firebase Console (true, or a role string like "owner").
+//   3. From that moment the rules below treat them as admin.
+//
+// IMPORTANT: deploy with
+//   firebase deploy --only firestore:rules
+// after updating.
+// =============================================================
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- Helpers ----------
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // Admin = signed in AND their uid exists in /admins/{uid}
+    function isAdmin() {
+      return isSignedIn()
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function isSelf(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    // ---------- /admins ----------
+    // Only existing admins can read or modify the admins list.
+    // The user creating themselves as admin is NOT allowed (must be
+    // promoted from the Console or another admin).
+    match /admins/{uid} {
+      allow read: if isAdmin();
+      allow create: if false;
+      allow update, delete: if isAdmin();
+    }
+
+    // ---------- /stats (single doc "main") ----------
+    // Public read; only admin can write.
+    match /stats/{docId} {
+      allow read: if true;
+      allow write: if isAdmin()
+        && docId == 'main'
+        && request.resource.data.keys().hasOnly(
+             ['championships', 'players', 'divisions', 'victories', 'appearances']
+           )
+        && request.resource.data.championships is int
+        && request.resource.data.championships >= 0
+        && request.resource.data.championships < 10000
+        && request.resource.data.players is int
+        && request.resource.data.players >= 0
+        && request.resource.data.players < 100000
+        && request.resource.data.divisions is int
+        && request.resource.data.divisions >= 0
+        && request.resource.data.divisions < 100
+        && request.resource.data.victories is int
+        && request.resource.data.victories >= 0
+        && request.resource.data.victories < 100000;
+    }
+
+    // ---------- /matches ----------
+    match /matches/{matchId} {
+      allow read: if true;
+      allow create: if isAdmin()
+        && request.resource.data.title is string
+        && request.resource.data.title.size() > 0
+        && request.resource.data.title.size() <= 200
+        && request.resource.data.status in ['Upcoming', 'Live', 'Finished']
+        && (!('link' in request.resource.data) || request.resource.data.link is string)
+        && (!('linkText' in request.resource.data) || request.resource.data.linkText is string)
+        && (!('datetime' in request.resource.data) || request.resource.data.datetime is string);
+      allow update, delete: if isAdmin();
+    }
+
+    // ---------- /rosters ----------
+    match /rosters/{rosterId} {
+      allow read: if true;
+      allow create: if isAdmin()
+        && request.resource.data.game is string
+        && request.resource.data.game.size() <= 60
+        && request.resource.data.division is string
+        && request.resource.data.division.size() <= 60
+        && request.resource.data.players is list
+        && request.resource.data.players.size() <= 25
+        && (!('rank' in request.resource.data) || request.resource.data.rank is string)
+        && (!('extra' in request.resource.data) || request.resource.data.extra is string);
+      allow update, delete: if isAdmin();
+    }
+
+    // ---------- /gallery (photos) ----------
+    // imageData is a base64 data URL capped at ~900KB to fit Firestore's
+    // 1MB document limit; rules double-check the size.
+    match /gallery/{photoId} {
+      allow read: if true;
+      allow create: if isAdmin()
+        && request.resource.data.imageData is string
+        && request.resource.data.imageData.size() <= 950000
+        && (!('caption' in request.resource.data)
+            || (request.resource.data.caption is string
+                && request.resource.data.caption.size() <= 200));
+      allow update, delete: if isAdmin();
+    }
+
+    // ---------- /achievements ----------
+    match /achievements/{id} {
+      allow read: if true;
+      allow create: if isAdmin()
+        && request.resource.data.title is string
+        && request.resource.data.title.size() <= 200
+        && request.resource.data.year is string
+        && request.resource.data.year.size() <= 10
+        && (!('imageData' in request.resource.data)
+            || (request.resource.data.imageData is string
+                && request.resource.data.imageData.size() <= 950000));
+      allow update, delete: if isAdmin();
+    }
+
+    // ---------- /events ----------
+    match /events/{id} {
+      allow read: if true;
+      allow create: if isAdmin()
+        && request.resource.data.title is string
+        && request.resource.data.title.size() <= 200
+        && (!('location' in request.resource.data) || request.resource.data.location is string)
+        && (!('link' in request.resource.data) || request.resource.data.link is string)
+        && (!('datetime' in request.resource.data) || request.resource.data.datetime is string);
+      allow update, delete: if isAdmin();
+    }
+
+    // ---------- /users/{uid} ----------
+    // A user can read/write their OWN profile only.
+    match /users/{uid} {
+      allow read: if isSelf(uid) || isAdmin();
+      allow create, update: if isSelf(uid)
+        && request.resource.data.keys().hasOnly(
+             ['email', 'displayName', 'lastLogin', 'role']
+           );
+      allow delete: if isAdmin();
+    }
+
+    // ---------- Default deny ----------
+    // Any collection not listed above is unreadable + unwritable.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

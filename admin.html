@@ -13,6 +13,12 @@
 <link rel="icon" type="image/png" href="crest.png" sizes="96x96">
 <link rel="apple-touch-icon" type="image/png" href="crest.png">
 <meta name="theme-color" content="#050814">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebasestorage.app wss://*.firebaseio.com https://identitytoolkit.googleapis.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="permissions-policy" content="camera=(), microphone=(), geolocation=(), interest-cohort=()">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+<meta http-equiv="Pragma" content="no-cache">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="styles.css">
 <style>
@@ -330,17 +336,22 @@
         <p class="font-display text-xl text-white tracking-wide">ADMIN ACCESS</p>
       </div>
     </div>
-    <form id="login-form" class="space-y-5">
+    <form id="login-form" class="space-y-5" autocomplete="on" novalidate>
       <div>
-        <label class="label-chip mb-2">Email</label>
-        <input id="email" type="email" required class="field w-full mt-2 px-3 py-3 rounded-sm font-body text-sm">
+        <label class="label-chip mb-2" for="email">Email</label>
+        <input id="email" name="email" type="email" required maxlength="120" autocomplete="username" spellcheck="false" autocapitalize="off" autocorrect="off" class="field w-full mt-2 px-3 py-3 rounded-sm font-body text-sm">
       </div>
       <div>
-        <label class="label-chip mb-2">Password</label>
-        <input id="password" type="password" required class="field w-full mt-2 px-3 py-3 rounded-sm font-body text-sm">
+        <label class="label-chip mb-2" for="password">Password</label>
+        <input id="password" name="password" type="password" required maxlength="128" autocomplete="current-password" class="field w-full mt-2 px-3 py-3 rounded-sm font-body text-sm">
       </div>
-      <p id="login-error" class="font-body text-xs text-red-400 hidden"></p>
-      <button type="submit" class="btn-primary font-display text-xs tracking-wide px-5 py-3.5 clip-角 w-full">LOG IN →</button>
+      <!-- Honeypot — hidden from humans, irresistible to bots -->
+      <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">
+        <label for="website">Website</label>
+        <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+      </div>
+      <p id="login-error" class="font-body text-xs text-red-400 hidden" role="alert" aria-live="polite"></p>
+      <button type="submit" id="login-btn" class="btn-primary font-display text-xs tracking-wide px-5 py-3.5 clip-角 w-full disabled:opacity-50 disabled:cursor-not-allowed">LOG IN →</button>
     </form>
   </div>
 </div>
@@ -732,64 +743,166 @@
   const eventList = document.getElementById("event-list");
   const eventCancel = document.getElementById("event-cancel");
 
-  onAuthStateChanged(auth, user => {
-    if (user) {
+  onAuthStateChanged(auth, async user => {
+    if (!user) {
+      loginView.classList.remove("hidden");
+      adminView.classList.add("hidden");
+      return;
+    }
+    // Signed in — but is this user an admin?
+    try {
+      const adminDoc = await getDoc(doc(db, "admins", user.uid));
+      if (!adminDoc.exists()) {
+        // Force sign-out so they can't sit in the admin UI
+        console.warn("Auth: user", user.uid, "is not in /admins — signing out.");
+        await signOut(auth);
+        loginError.textContent = "Access denied. This account is not authorized as admin.";
+        loginError.classList.remove("hidden");
+        loginView.classList.remove("hidden");
+        adminView.classList.add("hidden");
+        return;
+      }
       loginView.classList.add("hidden");
       adminView.classList.remove("hidden");
-      userEmailEl.textContent = user.email;
+      userEmailEl.textContent = user.email || "(no email)";
+      // Touch a profile doc to record activity (rules only allow self-write)
+      try {
+        await setDoc(doc(db, "users", user.uid), {
+          email: user.email || "",
+          lastLogin: serverTimestamp()
+        }, { merge: true });
+      } catch (e) { /* non-fatal */ }
       loadPhotos();
       loadMatches();
       loadStats();
       loadRosters();
       loadAchievements();
       loadEvents();
-    } else {
-      loginView.classList.add("hidden");
-      adminView.classList.add("hidden");
+    } catch (err) {
+      console.error("Admin gate error:", err);
+      await signOut(auth);
     }
   });
+
+  // ---------- Login rate-limit + honeypot ----------
+  const LOGIN_WINDOW_MS = 60_000;
+  const LOGIN_MAX_ATTEMPTS = 5;
+  const LOGIN_COOLDOWN_MS = 15_000;
+  let loginAttempts = [];
+  let loginLockedUntil = 0;
+
+  function recordLoginAttempt() {
+    const now = Date.now();
+    loginAttempts = loginAttempts.filter(t => now - t < LOGIN_WINDOW_MS);
+    loginAttempts.push(now);
+    return loginAttempts.length;
+  }
+
+  function setLoginError(msg) {
+    loginError.textContent = msg;
+    loginError.classList.remove("hidden");
+  }
 
   loginForm.addEventListener("submit", async e => {
     e.preventDefault();
     loginError.classList.add("hidden");
-    const email = document.getElementById("email").value.trim();
+    const loginBtn = document.getElementById("login-btn");
+    const honeypot = document.getElementById("website");
+    if (honeypot && honeypot.value) {
+      // Bot tripped the honeypot — silently pretend to succeed.
+      console.warn("Honeypot triggered.");
+      setLoginError("Login failed (auth/invalid-credential) — check your email and password.");
+      return;
+    }
+    if (Date.now() < loginLockedUntil) {
+      const wait = Math.ceil((loginLockedUntil - Date.now()) / 1000);
+      setLoginError("Too many attempts. Try again in " + wait + "s.");
+      return;
+    }
+    const emailRaw = document.getElementById("email").value;
+    const email = emailRaw.trim().toLowerCase();
     const password = document.getElementById("password").value;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 120) {
+      setLoginError("Enter a valid email address.");
+      return;
+    }
+    if (!password || password.length < 6 || password.length > 128) {
+      setLoginError("Password must be 6–128 characters.");
+      return;
+    }
+    loginBtn.disabled = true;
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      loginAttempts = [];
     } catch (err) {
-      const code = err?.code || "unknown";
-      loginError.textContent = "Login failed (" + code + ") — check your email and password.";
-      loginError.classList.remove("hidden");
-      console.error("Login error:", err);
+      const count = recordLoginAttempt();
+      if (count >= LOGIN_MAX_ATTEMPTS) {
+        loginLockedUntil = Date.now() + LOGIN_COOLDOWN_MS;
+        setLoginError("Too many attempts. Try again in " + Math.ceil(LOGIN_COOLDOWN_MS / 1000) + "s.");
+      } else {
+        const code = err?.code || "unknown";
+        // Generic error so attackers can't enumerate accounts.
+        setLoginError("Login failed (auth/invalid-credential) — check your email and password.");
+        console.warn("Login failed:", code, "attempt", count);
+      }
+    } finally {
+      loginBtn.disabled = false;
     }
   });
 
   logoutBtn.addEventListener("click", () => signOut(auth));
 
+  // ---------- Shared validators + sanitizers ----------
+  function safeStr(v, maxLen) {
+    return String(v || "").replace(/[\u0000-\u001F\u007F]/g, "").slice(0, maxLen).trim();
+  }
+  function safeUrl(v) {
+    const s = String(v || "").trim();
+    if (!s) return "";
+    try {
+      const u = new URL(s);
+      if (u.protocol === "http:" || u.protocol === "https:" || u.protocol === "mailto:") {
+        return u.toString().slice(0, 500);
+      }
+    } catch (_) {}
+    return "";
+  }
+  function adminGuard() {
+    if (!auth.currentUser) {
+      throw new Error("Not authenticated.");
+    }
+  }
+
   matchForm.addEventListener("submit", async e => {
     e.preventDefault();
     matchStatusMsg.textContent = "";
-    const datetime = document.getElementById("match-datetime").value;
-    const title = document.getElementById("match-title").value.trim();
+    try { adminGuard(); } catch (err) { matchStatusMsg.textContent = "Session expired — log in again."; return; }
+    const datetime = safeStr(document.getElementById("match-datetime").value, 50);
+    const title = safeStr(document.getElementById("match-title").value, 200);
     const status = document.getElementById("match-status").value;
-    const link = document.getElementById("match-link").value.trim();
-    const linkText = document.getElementById("match-link-text").value.trim();
+    const link = safeUrl(document.getElementById("match-link").value);
+    const linkText = safeStr(document.getElementById("match-link-text").value, 100);
+    if (!["Upcoming","Live","Finished"].includes(status)) {
+      matchStatusMsg.textContent = "Invalid status.";
+      return;
+    }
+    if (!title || !datetime) {
+      matchStatusMsg.textContent = "Title and date are required.";
+      return;
+    }
 
     try {
       await addDoc(collection(db, "matches"), {
-        datetime,
-        title,
-        status,
-        link: link || "",
-        linkText: linkText || "",
-        createdAt: serverTimestamp()
+        datetime, title, status, link, linkText,
+        createdAt: serverTimestamp(),
+        createdBy: auth.currentUser.uid
       });
       matchStatusMsg.textContent = "Match added!";
       matchForm.reset();
       loadMatches();
     } catch (err) {
       console.error(err);
-      matchStatusMsg.textContent = "Failed to add match — try again.";
+      matchStatusMsg.textContent = "Failed to add match — permission denied or network error.";
     } finally {
       setTimeout(() => (matchStatusMsg.textContent = ""), 3000);
     }
@@ -798,11 +911,12 @@
   statsForm.addEventListener("submit", async e => {
     e.preventDefault();
     statsStatusMsg.textContent = "";
+    try { adminGuard(); } catch (err) { statsStatusMsg.textContent = "Session expired — log in again."; return; }
     const data = {
-      championships: Number(document.getElementById("stat-championships").value) || 0,
-      players: Number(document.getElementById("stat-players").value) || 0,
-      divisions: Number(document.getElementById("stat-divisions").value) || 0,
-      victories: Number(document.getElementById("stat-victories").value) || 0,
+      championships: Math.max(0, Math.min(9999, Number(document.getElementById("stat-championships").value) || 0)),
+      players: Math.max(0, Math.min(99999, Number(document.getElementById("stat-players").value) || 0)),
+      divisions: Math.max(0, Math.min(99, Number(document.getElementById("stat-divisions").value) || 0)),
+      victories: Math.max(0, Math.min(99999, Number(document.getElementById("stat-victories").value) || 0)),
     };
 
     try {
@@ -810,7 +924,7 @@
       statsStatusMsg.textContent = "Stats saved!";
     } catch (err) {
       console.error(err);
-      statsStatusMsg.textContent = "Failed to save stats — try again.";
+      statsStatusMsg.textContent = "Failed to save stats — permission denied or network error.";
     } finally {
       setTimeout(() => (statsStatusMsg.textContent = ""), 3000);
     }
@@ -819,13 +933,14 @@
   rosterForm.addEventListener("submit", async e => {
     e.preventDefault();
     rosterStatusMsg.textContent = "";
-    const id = document.getElementById("roster-id").value.trim();
-    const game = document.getElementById("roster-game").value.trim().toUpperCase();
-    const division = document.getElementById("roster-division").value.trim();
-    const playersRaw = document.getElementById("roster-players").value.trim();
-    const players = playersRaw.split(",").map(s => s.trim()).filter(Boolean);
-    const extra = document.getElementById("roster-extra").value.trim();
-    const rank = document.getElementById("roster-rank").value.trim();
+    try { adminGuard(); } catch (err) { rosterStatusMsg.textContent = "Session expired — log in again."; return; }
+    const id = safeStr(document.getElementById("roster-id").value, 100);
+    const game = safeStr(document.getElementById("roster-game").value, 60).toUpperCase();
+    const division = safeStr(document.getElementById("roster-division").value, 60);
+    const playersRaw = safeStr(document.getElementById("roster-players").value, 500);
+    const players = playersRaw.split(",").map(s => safeStr(s, 20)).filter(Boolean).slice(0, 25);
+    const extra = safeStr(document.getElementById("roster-extra").value, 10);
+    const rank = safeStr(document.getElementById("roster-rank").value, 60);
 
     if (!game || !division || !players.length || !rank) {
       rosterStatusMsg.textContent = "Please fill in all required fields.";
@@ -847,7 +962,7 @@
       loadRosters();
     } catch (err) {
       console.error(err);
-      rosterStatusMsg.textContent = "Failed to save roster — try again.";
+      rosterStatusMsg.textContent = "Failed to save roster — permission denied or network error.";
     } finally {
       setTimeout(() => (rosterStatusMsg.textContent = ""), 3000);
     }
@@ -863,13 +978,18 @@
   achievementForm.addEventListener("submit", async e => {
     e.preventDefault();
     achievementStatusMsg.textContent = "";
-    const id = document.getElementById("achievement-id").value.trim();
-    const title = document.getElementById("achievement-title").value.trim();
-    const year = document.getElementById("achievement-year").value.trim();
+    try { adminGuard(); } catch (err) { achievementStatusMsg.textContent = "Session expired — log in again."; return; }
+    const id = safeStr(document.getElementById("achievement-id").value, 100);
+    const title = safeStr(document.getElementById("achievement-title").value, 200);
+    const year = safeStr(document.getElementById("achievement-year").value, 10);
     const fileInput = document.getElementById("achievement-file");
 
     if (!title || !year) {
       achievementStatusMsg.textContent = "Please fill in all required fields.";
+      return;
+    }
+    if (!/^\d{1,4}$/.test(year)) {
+      achievementStatusMsg.textContent = "Year must be 1–4 digits.";
       return;
     }
 
@@ -877,7 +997,19 @@
       const data = { title, year };
       const file = fileInput.files[0];
       if (file) {
+        if (!file.type.startsWith("image/")) {
+          achievementStatusMsg.textContent = "File must be an image.";
+          return;
+        }
+        if (file.size > 10 * 1024 * 1024) {
+          achievementStatusMsg.textContent = "Image too large (max 10MB).";
+          return;
+        }
         const imageData = await compressImage(file, 1000, 0.72);
+        if (imageData.length > 950000) {
+          achievementStatusMsg.textContent = "Image still too large — try a smaller photo.";
+          return;
+        }
         data.imageData = imageData;
       }
       if (id) {
@@ -893,7 +1025,7 @@
       loadAchievements();
     } catch (err) {
       console.error(err);
-      achievementStatusMsg.textContent = "Failed to save achievement — try again.";
+      achievementStatusMsg.textContent = "Failed to save achievement — permission denied or network error.";
     } finally {
       setTimeout(() => (achievementStatusMsg.textContent = ""), 3000);
     }
@@ -909,11 +1041,12 @@
   eventForm.addEventListener("submit", async e => {
     e.preventDefault();
     eventStatusMsg.textContent = "";
-    const id = document.getElementById("event-id").value.trim();
-    const title = document.getElementById("event-title").value.trim();
-    const datetime = document.getElementById("event-datetime").value;
-    const location = document.getElementById("event-location").value.trim();
-    const link = document.getElementById("event-link").value.trim();
+    try { adminGuard(); } catch (err) { eventStatusMsg.textContent = "Session expired — log in again."; return; }
+    const id = safeStr(document.getElementById("event-id").value, 100);
+    const title = safeStr(document.getElementById("event-title").value, 200);
+    const datetime = safeStr(document.getElementById("event-datetime").value, 50);
+    const location = safeStr(document.getElementById("event-location").value, 200);
+    const link = safeUrl(document.getElementById("event-link").value);
 
     if (!title || !datetime) {
       eventStatusMsg.textContent = "Please fill in all required fields.";
@@ -935,7 +1068,7 @@
       loadEvents();
     } catch (err) {
       console.error(err);
-      eventStatusMsg.textContent = "Failed to save event — try again.";
+      eventStatusMsg.textContent = "Failed to save event — permission denied or network error.";
     } finally {
       setTimeout(() => (eventStatusMsg.textContent = ""), 3000);
     }
@@ -950,9 +1083,18 @@
 
   uploadForm.addEventListener("submit", async e => {
     e.preventDefault();
+    try { adminGuard(); } catch (err) { uploadStatus.textContent = "Session expired — log in again."; return; }
     const file = document.getElementById("file-input").files[0];
-    const caption = document.getElementById("caption-input").value.trim();
+    const caption = safeStr(document.getElementById("caption-input").value, 200);
     if (!file) return;
+    if (!file.type.startsWith("image/")) {
+      uploadStatus.textContent = "File must be an image.";
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      uploadStatus.textContent = "Image too large (max 10MB).";
+      return;
+    }
 
     uploadBtn.disabled = true;
     uploadStatus.textContent = "Uploading…";
@@ -960,7 +1102,7 @@
     try {
       const imageData = await compressImage(file, 1000, 0.72);
 
-      if (imageData.length > 900000) {
+      if (imageData.length > 950000) {
         uploadStatus.textContent = "Image still too large after compression — try a smaller photo.";
         uploadBtn.disabled = false;
         return;
@@ -969,7 +1111,8 @@
       await addDoc(collection(db, "gallery"), {
         imageData,
         caption,
-        createdAt: serverTimestamp()
+        createdAt: serverTimestamp(),
+        createdBy: auth.currentUser.uid
       });
 
       uploadStatus.textContent = "Posted!";
@@ -977,7 +1120,7 @@
       loadPhotos();
     } catch (err) {
       console.error(err);
-      uploadStatus.textContent = "Upload failed — try again.";
+      uploadStatus.textContent = "Upload failed — permission denied or network error.";
     } finally {
       uploadBtn.disabled = false;
       setTimeout(() => (uploadStatus.textContent = ""), 3000);

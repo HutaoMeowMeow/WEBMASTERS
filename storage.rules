@@ -1,0 +1,35 @@
+rules_version = '2';
+
+// =============================================================
+// WEBMASTERS ESPORTS — Cloud Storage Security Rules
+// -------------------------------------------------------------
+// Currently the site stores images as base64 inside Firestore
+// documents (so no Storage bucket is used). If you later add a
+// Storage bucket (e.g. for high-res highlights), these rules
+// keep it admin-only.
+// =============================================================
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    function isAdmin() {
+      return isSignedIn()
+        && firestore.exists(/databases/(default)/documents/admins/$(request.auth.uid));
+    }
+
+    // Public can read anything in /public/
+    match /public/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin()
+        && request.resource.size < 5 * 1024 * 1024; // 5MB cap
+    }
+
+    // Everything else is private
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
