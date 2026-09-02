@@ -12,6 +12,12 @@ if (mobileMenuBtn && mobileMenu) {
       mobileMenu.classList.add("hidden");
     });
   });
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 768) {
+      mobileMenu.classList.add("hidden");
+      mobileMenu.classList.remove("open");
+    }
+  });
 }
 
 // ===== Achievement Modal =====
@@ -23,6 +29,7 @@ if (achievementModal && achievementModalClose && achievementModalBody) {
   document.addEventListener("click", (e) => {
     const card = e.target.closest(".achievement-card");
     if (!card) return;
+    if (e.target.closest("button, a")) return;
     const title = card.querySelector(".font-display")?.textContent || "";
     const year = card.querySelector(".font-body.text-xs")?.textContent || "";
     const img = card.querySelector("img");

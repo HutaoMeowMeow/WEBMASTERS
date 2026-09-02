@@ -26,15 +26,15 @@
 <!-- NAV -->
 <header class="fixed top-0 inset-x-0 z-50">
   <div class="border-b border-[color:var(--border-line)]" style="background:rgba(5,8,20,0.82);backdrop-filter:blur(18px);">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3 shrink-0">
-        <img src="crest.png" alt="Webmasters Esports crest" class="h-10 w-10 object-contain">
-        <div class="leading-tight hidden sm:block">
-          <p class="font-display text-sm tracking-wide text-white">WEBMASTERS</p>
-          <p class="font-body text-[11px] tracking-[0.25em] text-[color:var(--cyan)]">ESPORTS BANILAD</p>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 h-16 md:h-20 flex items-center justify-between gap-2">
+      <a href="index.html" class="flex items-center gap-2 sm:gap-3 shrink-0 min-w-0">
+        <img src="crest.png" alt="Webmasters Esports crest" class="h-9 w-9 sm:h-10 sm:w-10 object-contain shrink-0">
+        <div class="leading-tight hidden sm:block min-w-0">
+          <p class="font-display text-sm tracking-wide text-white whitespace-nowrap">WEBMASTERS</p>
+          <p class="font-body text-[11px] tracking-[0.25em] text-[color:var(--cyan)] whitespace-nowrap">ESPORTS BANILAD</p>
         </div>
       </a>
-      <button id="mobile-menu-btn" class="md:hidden text-white p-2" aria-label="Open menu">
+      <button id="mobile-menu-btn" class="md:hidden text-white p-2 shrink-0" aria-label="Open menu">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       </button>
       <nav id="nav-links" class="hidden md:flex items-center gap-8 font-body text-sm">
@@ -44,21 +44,21 @@
         <a href="news.html" class="nav-link">NEWS</a>
         <a href="about.html" class="nav-link">ABOUT</a>
       </nav>
-      <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="btn-primary font-display text-xs tracking-wide px-5 py-2.5 clip-角 hover:opacity-95 transition hidden md:inline-block">JOIN DISCORD</a>
+      <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="btn-primary font-display text-xs tracking-wide px-5 py-2.5 clip-角 hover:opacity-95 transition hidden md:inline-block whitespace-nowrap">JOIN DISCORD</a>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden border-t border-[color:var(--border-line)] px-6 py-4 space-y-3">
-      <a href="index.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">Home</a>
-      <a href="teams.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">Teams</a>
-      <a href="matches.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">Matches</a>
-      <a href="news.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">News</a>
-      <a href="about.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">About</a>
-      <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="block font-body text-sm text-[color:var(--cyan)] hover:text-white transition-colors">Join Discord</a>
+    <div id="mobile-menu" class="hidden md:hidden border-t border-[color:var(--border-line)] px-4 sm:px-6 py-4 flex-col gap-2">
+      <a href="index.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors py-1.5 min-w-0">Home</a>
+      <a href="teams.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors py-1.5 min-w-0">Teams</a>
+      <a href="matches.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors py-1.5 min-w-0">Matches</a>
+      <a href="news.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors py-1.5 min-w-0">News</a>
+      <a href="about.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors py-1.5 min-w-0">About</a>
+      <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="block font-body text-sm text-[color:var(--cyan)] hover:text-white transition-colors py-1.5 min-w-0">Join Discord</a>
     </div>
   </div>
 </header>
 
 <!-- HERO -->
-<section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+<section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-20">
   <div class="absolute inset-0 grid-overlay opacity-35"></div>
   <div class="absolute inset-0 glow-radial"></div>
   <div class="absolute inset-0 perspective-floor"></div>
@@ -67,7 +67,7 @@
   <div class="hud-line" style="top:20%;left:8%;right:8%;height:1px;opacity:0.25;"></div>
   <div class="hud-line" style="bottom:24%;left:14%;right:14%;height:1px;opacity:0.18;"></div>
 
-  <div class="relative max-w-6xl mx-auto px-6 text-center z-10">
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 text-center z-10">
     <div class="mb-10 reveal">
       <div class="relative inline-block">
         <img src="crest.png" alt="Webmasters Esports Banilad crest" class="mx-auto h-28 md:h-40 w-auto object-contain crest-glow">
@@ -76,17 +76,17 @@
     </div>
 
      <div class="reveal reveal-delay-1">
-      <p class="font-display text-xs tracking-[0.35em] text-[color:var(--cyan)] uppercase mb-4">University of Cebu — Banilad</p>
-      <h1 class="font-display font-black leading-[0.9] text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight mb-3">
+      <p class="font-display text-[10px] sm:text-xs tracking-[0.2em] sm:tracking-[0.35em] text-[color:var(--cyan)] uppercase mb-3 sm:mb-4 px-2">University of Cebu — Banilad</p>
+      <h1 class="font-display font-black leading-[0.9] text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight mb-3 break-words">
         <span class="hero-title">WEBMASTERS</span>
       </h1>
-      <p class="font-display font-extrabold leading-[0.95] text-3xl sm:text-4xl md:text-5xl text-[color:var(--chrome)] tracking-[0.4em] mb-6">
+      <p class="font-display font-extrabold leading-[0.95] text-xl sm:text-3xl md:text-4xl lg:text-5xl text-[color:var(--chrome)] tracking-[0.2em] sm:tracking-[0.35em] md:tracking-[0.4em] mb-6 px-2">
         ESPORTS BANILAD
       </p>
     </div>
 
     <div class="reveal hero-sub reveal-delay-2">
-      <p class="font-display text-sm tracking-[0.6em] uppercase">Compete. Conquer. Represent.</p>
+      <p class="font-display text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.4em] md:tracking-[0.6em] uppercase px-2">Compete. Conquer. Represent.</p>
     </div>
 
     <div class="reveal reveal-delay-3">
@@ -119,22 +119,22 @@
       <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-3">BY THE NUMBERS</h2>
       <p class="font-body text-sm text-[color:var(--body-text)]">Metrics that define our journey so far.</p>
     </div>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-      <div class="reveal reveal-delay-1">
-        <p id="stat-championships" class="font-display text-4xl md:text-5xl font-bold text-[color:var(--cyan)] num-glow stat-counter" data-target="0">0</p>
-        <p class="font-body text-xs tracking-wide mt-2 text-[color:var(--body-text)]">Championships Won</p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 text-center">
+      <div class="reveal reveal-delay-1 min-w-0">
+        <p id="stat-championships" class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-[color:var(--cyan)] num-glow stat-counter break-words" data-target="0">0</p>
+        <p class="font-body text-xs tracking-wide mt-2 text-[color:var(--body-text)] break-words">Championships Won</p>
       </div>
-      <div class="reveal reveal-delay-2">
-        <p id="stat-players" class="font-display text-4xl md:text-5xl font-bold text-[color:var(--cyan)] num-glow stat-counter" data-target="0">0</p>
-        <p class="font-body text-xs tracking-wide mt-2 text-[color:var(--body-text)]">Active Players</p>
+      <div class="reveal reveal-delay-2 min-w-0">
+        <p id="stat-players" class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-[color:var(--cyan)] num-glow stat-counter break-words" data-target="0">0</p>
+        <p class="font-body text-xs tracking-wide mt-2 text-[color:var(--body-text)] break-words">Active Players</p>
       </div>
-      <div class="reveal reveal-delay-3">
-        <p id="stat-divisions" class="font-display text-4xl md:text-5xl font-bold text-[color:var(--cyan)] num-glow stat-counter" data-target="0">0</p>
-        <p class="font-body text-xs tracking-wide mt-2 text-[color:var(--body-text)]">Divisions Fielded</p>
+      <div class="reveal reveal-delay-3 min-w-0">
+        <p id="stat-divisions" class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-[color:var(--cyan)] num-glow stat-counter break-words" data-target="0">0</p>
+        <p class="font-body text-xs tracking-wide mt-2 text-[color:var(--body-text)] break-words">Divisions Fielded</p>
       </div>
-      <div class="reveal reveal-delay-4">
-        <p id="stat-victories" class="font-display text-4xl md:text-5xl font-bold text-[color:var(--cyan)] num-glow stat-counter" data-target="0">0</p>
-        <p class="font-body text-xs tracking-wide mt-2 text-[color:var(--body-text)]">Tournament Appearances</p>
+      <div class="reveal reveal-delay-4 min-w-0">
+        <p id="stat-victories" class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-[color:var(--cyan)] num-glow stat-counter break-words" data-target="0">0</p>
+        <p class="font-body text-xs tracking-wide mt-2 text-[color:var(--body-text)] break-words">Tournament Appearances</p>
       </div>
     </div>
   </div>
@@ -158,9 +158,9 @@
           <img src="crest.png" alt="Webmasters crest" class="absolute inset-0 w-full h-full object-contain opacity-10">
           <div class="game-accent" style="background:var(--accent-valorant)"></div>
         </div>
-        <div class="card-body p-7">
+        <div class="card-body p-6 sm:p-7">
           <span class="font-display text-xs tracking-widest text-[color:var(--accent-valorant)] uppercase">Tactical Shooter</span>
-          <h3 class="font-display text-3xl md:text-4xl font-bold text-white mb-2">VALORANT</h3>
+          <h3 class="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 break-words min-w-0">VALORANT</h3>
           <p class="font-body text-sm text-[color:var(--body-text)] mb-5 max-w-xs">Precision gunplay and tactical ability composition. We duel for the crown.</p>
           <span class="font-body text-[color:var(--accent-valorant)] font-semibold tracking-wide">VIEW TEAM →</span>
         </div>
@@ -172,9 +172,9 @@
           <img src="crest.png" alt="Webmasters crest" class="absolute inset-0 w-full h-full object-contain opacity-10">
           <div class="game-accent" style="background:var(--accent-mlbb)"></div>
         </div>
-        <div class="card-body p-7">
+        <div class="card-body p-6 sm:p-7">
           <span class="font-display text-xs tracking-widest text-[color:var(--accent-mlbb)] uppercase">MOBA</span>
-          <h3 class="font-display text-3xl md:text-4xl font-bold text-white mb-2">MOBILE LEGENDS</h3>
+          <h3 class="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 break-words min-w-0">MOBILE LEGENDS</h3>
           <p class="font-body text-sm text-[color:var(--body-text)] mb-5 max-w-xs">Five against five on the Battlefield of Doom. Macro, mechanics, and mind games.</p>
           <span class="font-body text-[color:var(--accent-mlbb)] font-semibold tracking-wide">VIEW TEAM →</span>
         </div>
@@ -288,9 +288,9 @@
       </ul>
     </div>
   </div>
-  <div class="relative max-w-7xl mx-auto pt-6 border-t border-[color:var(--border-line)] flex flex-col sm:flex-row items-center justify-between gap-3 font-body text-xs text-[color:var(--body-text)]">
-    <p>© 2026 Webmasters Esports Banilad · University of Cebu – Banilad.</p>
-    <p>Built by the Webmasters student org.</p>
+  <div class="relative max-w-7xl mx-auto pt-6 border-t border-[color:var(--border-line)] flex flex-col sm:flex-row items-center justify-between gap-3 font-body text-xs text-[color:var(--body-text)] text-center sm:text-left">
+    <p class="break-words">© 2026 Webmasters Esports Banilad · University of Cebu – Banilad.</p>
+    <p class="break-words">Built by the Webmasters student org.</p>
   </div>
 </footer>
 
@@ -368,14 +368,14 @@
         const extraHtml = data.extra ? `<div class="h-9 w-9 rounded-full bg-[#0a1626] border-2 border-[#050814] flex items-center justify-center font-body text-[11px] text-[color:var(--chrome)]">${escapeHtml(data.extra)}</div>` : "";
         grid.innerHTML += `
           <div class="roster-card panel clip-角 p-6 ${themeClass}">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="font-display text-lg text-white tracking-wide">WEBMASTERS // ${escapeHtml(game)}</h3>
-              <span class="font-body text-[10px] px-2.5 py-1 rounded-sm border border-[color:var(--border-line)] text-[color:${gameAccent}]">${escapeHtml(data.division || "")}</span>
+            <div class="flex items-center justify-between gap-3 mb-4">
+              <h3 class="font-display text-base sm:text-lg text-white tracking-wide break-words min-w-0">WEBMASTERS // ${escapeHtml(game)}</h3>
+              <span class="font-body text-[10px] px-2.5 py-1 rounded-sm border border-[color:var(--border-line)] text-[color:${gameAccent}] shrink-0 whitespace-nowrap">${escapeHtml(data.division || "")}</span>
             </div>
-            <div class="flex -space-x-2 mb-4">${playersHtml}${extraHtml}</div>
-            <div class="flex items-center justify-between font-body text-sm">
-              <span>Regional Rank</span>
-              <span class="text-[color:var(--cyan)] font-semibold">${escapeHtml(data.rank || "")}</span>
+            <div class="flex -space-x-2 mb-4 overflow-hidden">${playersHtml}${extraHtml}</div>
+            <div class="flex items-center justify-between font-body text-sm gap-2">
+              <span class="shrink-0">Regional Rank</span>
+              <span class="text-[color:var(--cyan)] font-semibold truncate min-w-0">${escapeHtml(data.rank || "")}</span>
             </div>
           </div>`;
       });
@@ -401,8 +401,8 @@
         grid.innerHTML += `
           <div class="achievement-card roster-card panel clip-角 overflow-hidden reveal">
             ${imageHtml}
-            <div class="p-6">
-              <p class="font-display text-lg text-white mb-2">${escapeHtml(data.title || "")}</p>
+            <div class="p-5 sm:p-6 min-w-0">
+              <p class="font-display text-base sm:text-lg text-white mb-2 break-words line-clamp-2">${escapeHtml(data.title || "")}</p>
               <div class="flex items-center gap-3 font-body text-xs text-[color:var(--body-text)]">
                 <span>${escapeHtml(data.year || "")}</span>
               </div>
@@ -430,11 +430,11 @@
       const data = snap.docs[0].data();
       card.innerHTML = `
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <p class="font-display text-xl text-white mb-2">${escapeHtml(data.title || "")}</p>
-            <p class="font-body text-sm text-[color:var(--body-text)]">${formatDate(data.datetime)}${data.location ? " · " + escapeHtml(data.location) : ""}</p>
+          <div class="min-w-0">
+            <p class="font-display text-lg sm:text-xl text-white mb-2 break-words">${escapeHtml(data.title || "")}</p>
+            <p class="font-body text-sm text-[color:var(--body-text)] break-words">${formatDate(data.datetime)}${data.location ? " · " + escapeHtml(data.location) : ""}</p>
           </div>
-          ${data.link ? `<a href="${escapeHtml(data.link)}" target="_blank" rel="noopener" class="btn-primary font-display text-xs tracking-wide px-6 py-3 clip-角 whitespace-nowrap">VIEW DETAILS</a>` : ""}
+          ${data.link ? `<a href="${escapeHtml(data.link)}" target="_blank" rel="noopener" class="btn-primary font-display text-xs tracking-wide px-6 py-3 clip-角 whitespace-nowrap shrink-0">VIEW DETAILS</a>` : ""}
         </div>`;
     } catch (err) {
       console.error("Next event failed to load:", err);
@@ -470,13 +470,13 @@
         box.innerHTML += `
           <div class="match-card panel clip-角 p-5 md:p-6 match-upcoming reveal">
             <div class="grid grid-cols-1 md:grid-cols-[140px_1fr_140px_auto] items-center gap-4">
-              <div class="font-body text-sm text-[color:var(--body-text)]">${formatDate(datetime)}</div>
-              <div class="font-display text-white text-sm md:text-base flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full" style="background:${accent}"></span>
-                ${escapeHtml(title)}
+              <div class="font-body text-sm text-[color:var(--body-text)] text-center md:text-left break-words">${formatDate(datetime)}</div>
+              <div class="font-display text-white text-sm md:text-base flex items-center gap-2 min-w-0 break-words">
+                <span class="w-2 h-2 rounded-full shrink-0" style="background:${accent}"></span>
+                <span class="min-w-0 break-words">${escapeHtml(title)}</span>
               </div>
-              <div class="font-body text-xs text-[color:var(--body-text)]">Upcoming</div>
-              <a href="${escapeHtml(link || "#")}" class="font-body text-xs text-[color:var(--cyan)] hover:text-white transition whitespace-nowrap">${escapeHtml(linkText || "Details")} →</a>
+              <div class="font-body text-xs text-[color:var(--body-text)] text-center md:text-left">Upcoming</div>
+              <a href="${escapeHtml(link || "#")}" class="font-body text-xs text-[color:var(--cyan)] hover:text-white transition whitespace-nowrap text-center md:text-left">${escapeHtml(linkText || "Details")} →</a>
             </div>
           </div>`;
       });

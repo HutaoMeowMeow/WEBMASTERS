@@ -26,15 +26,15 @@
 <!-- NAV -->
 <header class="fixed top-0 inset-x-0 z-50">
   <div class="border-b border-[color:var(--border-line)]" style="background:rgba(5,8,20,0.82);backdrop-filter:blur(18px);">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3 shrink-0">
-        <img src="crest.png" alt="Webmasters Esports crest" class="h-10 w-10 object-contain">
-        <div class="leading-tight hidden sm:block">
-          <p class="font-display text-sm tracking-wide text-white">WEBMASTERS</p>
-          <p class="font-body text-[11px] tracking-[0.25em] text-[color:var(--cyan)]">ESPORTS BANILAD</p>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 h-16 md:h-20 flex items-center justify-between gap-2">
+      <a href="index.html" class="flex items-center gap-2 sm:gap-3 shrink-0 min-w-0">
+        <img src="crest.png" alt="Webmasters Esports crest" class="h-9 w-9 sm:h-10 sm:w-10 object-contain shrink-0">
+        <div class="leading-tight hidden sm:block min-w-0">
+          <p class="font-display text-sm tracking-wide text-white whitespace-nowrap">WEBMASTERS</p>
+          <p class="font-body text-[11px] tracking-[0.25em] text-[color:var(--cyan)] whitespace-nowrap">ESPORTS BANILAD</p>
         </div>
       </a>
-      <button id="mobile-menu-btn" class="md:hidden text-white p-2" aria-label="Open menu">
+      <button id="mobile-menu-btn" class="md:hidden text-white p-2 shrink-0" aria-label="Open menu">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       </button>
       <nav id="nav-links" class="hidden md:flex items-center gap-8 font-body text-sm">
@@ -44,41 +44,43 @@
         <a href="news.html" class="nav-link">NEWS</a>
         <a href="about.html" class="nav-link">ABOUT</a>
       </nav>
-      <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="btn-primary font-display text-xs tracking-wide px-5 py-2.5 clip-角 hover:opacity-95 transition hidden md:inline-block">JOIN DISCORD</a>
+      <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="btn-primary font-display text-xs tracking-wide px-5 py-2.5 clip-角 hover:opacity-95 transition hidden md:inline-block whitespace-nowrap">JOIN DISCORD</a>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden border-t border-[color:var(--border-line)] px-6 py-4 space-y-3">
-      <a href="index.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">Home</a>
-      <a href="teams.html" class="block font-body text-sm font-medium text-white transition-colors">Teams</a>
-      <a href="matches.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">Matches</a>
-      <a href="news.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">News</a>
-      <a href="about.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">About</a>
-      <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="block font-body text-sm text-[color:var(--cyan)] hover:text-white transition-colors">Join Discord</a>
+    <div id="mobile-menu" class="hidden md:hidden border-t border-[color:var(--border-line)] px-4 sm:px-6 py-4 flex-col gap-2">
+      <a href="index.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors py-1.5 min-w-0">Home</a>
+      <a href="teams.html" class="block font-body text-sm font-medium text-white transition-colors py-1.5 min-w-0">Teams</a>
+      <a href="matches.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors py-1.5 min-w-0">Matches</a>
+      <a href="news.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors py-1.5 min-w-0">News</a>
+      <a href="about.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors py-1.5 min-w-0">About</a>
+      <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="block font-body text-sm text-[color:var(--cyan)] hover:text-white transition-colors py-1.5 min-w-0">Join Discord</a>
     </div>
   </div>
 </header>
 
 <!-- TEAM INTRO -->
-<section class="relative pt-32 pb-16 px-6 lg:px-10">
+<section class="relative pt-24 md:pt-32 pb-12 md:pb-16 px-4 sm:px-6 lg:px-10">
   <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-14 reveal">
+    <div class="text-center mb-10 md:mb-14 reveal">
       <p class="font-display text-xs tracking-[0.3em] text-[color:var(--cyan)] uppercase mb-3">The Squads</p>
-      <h1 class="font-display section-title font-black text-white mb-4">ACTIVE ROSTERS</h1>
+      <h1 class="font-display section-title font-black text-white mb-4 break-words">ACTIVE ROSTERS</h1>
       <p class="font-body text-base text-[color:var(--body-text)] max-w-2xl mx-auto">Two games. One organization. One banner. Meet the Webmasters squads.</p>
     </div>
   </div>
 </section>
 
 <!-- GAME SELECTOR -->
-<div class="max-w-7xl mx-auto px-6 lg:px-10 mb-10 flex justify-center">
-  <div class="flex items-center gap-2 panel clip-角 p-1.5 font-body text-xs">
-    <button class="game-tab-btn font-display text-xs tracking-wide px-5 py-2.5 clip-角 transition-all active-tab" data-game="all">ALL</button>
-    <button class="game-tab-btn font-display text-xs tracking-wide px-5 py-2.5 clip-角 transition-all" data-game="valorant">VALORANT</button>
-    <button class="game-tab-btn font-display text-xs tracking-wide px-5 py-2.5 clip-角 transition-all" data-game="mlbb">MLBB</button>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 mb-8 md:mb-10 -mx-4 sm:mx-auto">
+  <div class="overflow-x-auto sm:overflow-visible -mx-4 sm:mx-0 px-4 sm:px-0">
+    <div class="inline-flex sm:flex items-center justify-start sm:justify-center gap-2 sm:gap-3 panel clip-角 p-1.5 font-body text-xs mx-auto">
+      <button class="game-tab-btn font-display text-xs tracking-wide px-4 sm:px-5 py-2 sm:py-2.5 clip-角 transition-all active-tab whitespace-nowrap" data-game="all">ALL</button>
+      <button class="game-tab-btn font-display text-xs tracking-wide px-4 sm:px-5 py-2 sm:py-2.5 clip-角 transition-all whitespace-nowrap" data-game="valorant">VALORANT</button>
+      <button class="game-tab-btn font-display text-xs tracking-wide px-4 sm:px-5 py-2 sm:py-2.5 clip-角 transition-all whitespace-nowrap" data-game="mlbb">MLBB</button>
+    </div>
   </div>
 </div>
 
 <!-- ROSTERS -->
-<section id="teams" class="relative pb-24 px-6 lg:px-10">
+<section id="teams" class="relative pb-20 md:pb-24 px-4 sm:px-6 lg:px-10">
   <div class="max-w-7xl mx-auto">
     <div id="rosters-grid" class="space-y-16">
       <p class="font-body text-sm text-center">Loading rosters…</p>
@@ -118,9 +120,9 @@
       </ul>
     </div>
   </div>
-  <div class="relative max-w-7xl mx-auto pt-6 border-t border-[color:var(--border-line)] flex flex-col sm:flex-row items-center justify-between gap-3 font-body text-xs text-[color:var(--body-text)]">
-    <p>© 2026 Webmasters Esports Banilad · University of Cebu – Banilad.</p>
-    <p>Built by the Webmasters student org.</p>
+  <div class="relative max-w-7xl mx-auto pt-6 border-t border-[color:var(--border-line)] flex flex-col sm:flex-row items-center justify-between gap-3 font-body text-xs text-[color:var(--body-text)] text-center sm:text-left">
+    <p class="break-words">© 2026 Webmasters Esports Banilad · University of Cebu – Banilad.</p>
+    <p class="break-words">Built by the Webmasters student org.</p>
   </div>
 </footer>
 
@@ -219,26 +221,33 @@
     const gameName = data.game || "TEAM";
     const players = (data.players || []);
     const divisionBadge = `<span class="font-body text-[10px] px-2.5 py-1 rounded-sm border border-[color:var(--border-line)]" style="color:${accent}">${escapeHtml(data.division || "")}</span>`;
+    const playerCards = players.map(p => `
+      <div class="panel clip-角 p-3 sm:p-4 min-w-0 text-center">
+        <div class="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-gradient-to-br from-[#0f2540] to-[#132c4e] border-2 border-[#050814] mx-auto flex items-center justify-center font-display text-xs text-white">${escapeHtml(p)}</div>
+        <p class="font-display text-xs sm:text-sm text-white mt-2 truncate">${escapeHtml(p)}</p>
+      </div>
+    `).join("");
+    const extraCard = data.extra ? `<div class="panel clip-角 p-3 sm:p-4 text-center min-w-0"><div class="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-[#0a1626] border-2 border-[#050814] mx-auto flex items-center justify-center font-body text-xs text-[color:var(--chrome)]">${escapeHtml(data.extra)}</div></div>` : "";
     return `
       <div class="team-banner panel clip-角 overflow-hidden mb-8">
         <div class="relative h-44">
           <div class="absolute inset-0 ${bannerClass(key)}"></div>
           <img src="crest.png" alt="Webmasters crest" class="absolute inset-0 w-full h-full object-contain opacity-10">
           <div class="team-accent" style="background:${accent}"></div>
-          <div class="absolute inset-0 flex items-end p-6">
-            <div>
+          <div class="absolute inset-0 flex items-end p-5 sm:p-6">
+            <div class="min-w-0 max-w-full">
               <div class="font-display text-xs tracking-widest text-[color:${accent}] uppercase">WEBMASTERS</div>
-              <h3 class="font-display text-2xl md:text-3xl font-bold text-white">${escapeHtml(gameName)}</h3>
-              <div class="flex items-center gap-2 mt-1 font-body text-xs text-[color:var(--body-text)]">${divisionBadge}</div>
+              <h3 class="font-display text-xl sm:text-2xl md:text-3xl font-bold text-white break-words min-w-0">${escapeHtml(gameName)}</h3>
+              <div class="flex flex-wrap items-center gap-2 mt-1 font-body text-xs text-[color:var(--body-text)]">${divisionBadge}</div>
             </div>
           </div>
         </div>
-        <div class="p-6">
-          <div class="flex items-center justify-between font-body text-sm text-[color:var(--body-text)] mb-4">
-            <span>Regional Rank</span>
-            <span class="text-[color:${accent}] font-semibold">${escapeHtml(data.rank || "")}</span>
+        <div class="p-5 sm:p-6">
+          <div class="flex items-center justify-between font-body text-sm text-[color:var(--body-text)] mb-4 gap-2">
+            <span class="shrink-0">Regional Rank</span>
+            <span class="text-[color:${accent}] font-semibold truncate min-w-0">${escapeHtml(data.rank || "")}</span>
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
             ${playerCards}${extraCard}
           </div>
         </div>

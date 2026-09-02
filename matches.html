@@ -26,15 +26,15 @@
 <!-- NAV -->
 <header class="fixed top-0 inset-x-0 z-50">
   <div class="border-b border-[color:var(--border-line)]" style="background:rgba(5,8,20,0.82);backdrop-filter:blur(18px);">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3 shrink-0">
-        <img src="crest.png" alt="Webmasters Esports crest" class="h-10 w-10 object-contain">
-        <div class="leading-tight hidden sm:block">
-          <p class="font-display text-sm tracking-wide text-white">WEBMASTERS</p>
-          <p class="font-body text-[11px] tracking-[0.25em] text-[color:var(--cyan)]">ESPORTS BANILAD</p>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 h-16 md:h-20 flex items-center justify-between gap-2">
+      <a href="index.html" class="flex items-center gap-2 sm:gap-3 shrink-0 min-w-0">
+        <img src="crest.png" alt="Webmasters Esports crest" class="h-9 w-9 sm:h-10 sm:w-10 object-contain shrink-0">
+        <div class="leading-tight hidden sm:block min-w-0">
+          <p class="font-display text-sm tracking-wide text-white whitespace-nowrap">WEBMASTERS</p>
+          <p class="font-body text-[11px] tracking-[0.25em] text-[color:var(--cyan)] whitespace-nowrap">ESPORTS BANILAD</p>
         </div>
       </a>
-      <button id="mobile-menu-btn" class="md:hidden text-white p-2" aria-label="Open menu">
+      <button id="mobile-menu-btn" class="md:hidden text-white p-2 shrink-0" aria-label="Open menu">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       </button>
       <nav id="nav-links" class="hidden md:flex items-center gap-8 font-body text-sm">
@@ -44,42 +44,46 @@
         <a href="news.html" class="nav-link">NEWS</a>
         <a href="about.html" class="nav-link">ABOUT</a>
       </nav>
-      <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="btn-primary font-display text-xs tracking-wide px-5 py-2.5 clip-∠ hover:opacity-95 transition hidden md:inline-block">JOIN DISCORD</a>
+      <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="btn-primary font-display text-xs tracking-wide px-5 py-2.5 clip-∠ hover:opacity-95 transition hidden md:inline-block whitespace-nowrap">JOIN DISCORD</a>
     </div>
-    <div id="mobile-menu" class="hidden md:hidden border-t border-[color:var(--border-line)] px-6 py-4 space-y-3">
-      <a href="index.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">Home</a>
-      <a href="teams.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">Teams</a>
-      <a href="matches.html" class="block font-body text-sm font-medium text-white transition-colors">Matches</a>
-      <a href="news.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">News</a>
-      <a href="about.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">About</a>
-      <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="block font-body text-sm text-[color:var(--cyan)] hover:text-white transition-colors">Join Discord</a>
+    <div id="mobile-menu" class="hidden md:hidden border-t border-[color:var(--border-line)] px-4 sm:px-6 py-4 flex-col gap-2">
+      <a href="index.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors py-1.5 min-w-0">Home</a>
+      <a href="teams.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors py-1.5 min-w-0">Teams</a>
+      <a href="matches.html" class="block font-body text-sm font-medium text-white transition-colors py-1.5 min-w-0">Matches</a>
+      <a href="news.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors py-1.5 min-w-0">News</a>
+      <a href="about.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors py-1.5 min-w-0">About</a>
+      <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="block font-body text-sm text-[color:var(--cyan)] hover:text-white transition-colors py-1.5 min-w-0">Join Discord</a>
     </div>
   </div>
 </header>
 
 <!-- MATCH CENTER -->
-<section id="schedule" class="relative pt-32 pb-24 px-6 lg:px-10">
+<section id="schedule" class="relative pt-24 md:pt-32 pb-20 md:pb-24 px-4 sm:px-6 lg:px-10">
   <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-12 reveal">
+    <div class="text-center mb-10 md:mb-12 reveal">
       <p class="font-display text-xs tracking-[0.3em] text-[color:var(--cyan)] uppercase mb-3">Fixtures</p>
-      <h1 class="font-display section-title font-black text-white mb-3">MATCH CENTER</h1>
+      <h1 class="font-display section-title font-black text-white mb-3 break-words">MATCH CENTER</h1>
       <p class="font-body text-base text-[color:var(--body-text)] max-w-2xl mx-auto">Upcoming fixtures and results across Valorant and Mobile Legends: Bang Bang.</p>
     </div>
 
-    <div class="flex flex-col sm:flex-row sm:items-center justify-center gap-3 mb-10 reveal reveal-delay-1">
-      <div class="font-display text-[10px] tracking-widest text-[color:var(--body-text)] uppercase">GAME</div>
-      <div class="flex flex-wrap gap-1.5">
-        <button class="filter-btn active font-display text-xs tracking-wide px-5 py-2.5 clip-∠ border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all" data-filter="all">ALL</button>
-        <button class="filter-btn font-display text-xs tracking-wide px-5 py-2.5 clip-∠ border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all" data-filter="valorant">VALORANT</button>
-        <button class="filter-btn font-display text-xs tracking-wide px-5 py-2.5 clip-∠ border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all" data-filter="mlbb">MLBB</button>
+    <div class="flex flex-col items-start sm:items-center gap-3 mb-10 reveal reveal-delay-1">
+      <div class="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
+        <div class="font-display text-[10px] tracking-widest text-[color:var(--body-text)] uppercase shrink-0">GAME</div>
+        <div class="flex flex-wrap gap-1.5 sm:gap-2">
+          <button class="filter-btn active font-display text-xs tracking-wide px-3 sm:px-5 py-2 sm:py-2.5 clip-∠ border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all whitespace-nowrap" data-filter="all">ALL</button>
+          <button class="filter-btn font-display text-xs tracking-wide px-3 sm:px-5 py-2 sm:py-2.5 clip-∠ border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all whitespace-nowrap" data-filter="valorant">VALORANT</button>
+          <button class="filter-btn font-display text-xs tracking-wide px-3 sm:px-5 py-2 sm:py-2.5 clip-∠ border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all whitespace-nowrap" data-filter="mlbb">MLBB</button>
+        </div>
       </div>
-      <div class="w-px h-6 bg-[color:var(--border-line)] sm:mx-2"></div>
-      <div class="font-display text-[10px] tracking-widest text-[color:var(--body-text)] uppercase">STATUS</div>
-      <div class="flex flex-wrap gap-1.5">
-        <button class="status-btn active font-display text-xs tracking-wide px-5 py-2.5 clip-∠ border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all" data-status="all">ALL</button>
-        <button class="status-btn font-display text-xs tracking-wide px-5 py-2.5 clip-∠ border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all" data-status="upcoming">UPCOMING</button>
-        <button class="status-btn font-display text-xs tracking-wide px-5 py-2.5 clip-∠ border border-red-400/30 text-red-400 hover:text-red-300 hover:border-red-400/60 transition-all" data-status="live">LIVE</button>
-        <button class="status-btn font-display text-xs tracking-wide px-5 py-2.5 clip-∠ border border-[color:var(--border-line)] text-[color:var(--body-text)] hover:text-white hover:border-[#c4d0dc]/50 transition-all" data-status="completed">COMPLETED</button>
+      <div class="w-full h-px sm:h-6 sm:w-px bg-[color:var(--border-line)] sm:mx-2"></div>
+      <div class="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
+        <div class="font-display text-[10px] tracking-widest text-[color:var(--body-text)] uppercase shrink-0">STATUS</div>
+        <div class="flex flex-wrap gap-1.5 sm:gap-2">
+          <button class="status-btn active font-display text-xs tracking-wide px-3 sm:px-5 py-2 sm:py-2.5 clip-∠ border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all whitespace-nowrap" data-status="all">ALL</button>
+          <button class="status-btn font-display text-xs tracking-wide px-3 sm:px-5 py-2 sm:py-2.5 clip-∠ border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all whitespace-nowrap" data-status="upcoming">UPCOMING</button>
+          <button class="status-btn font-display text-xs tracking-wide px-3 sm:px-5 py-2 sm:py-2.5 clip-∠ border border-red-400/30 text-red-400 hover:text-red-300 hover:border-red-400/60 transition-all whitespace-nowrap" data-status="live">LIVE</button>
+          <button class="status-btn font-display text-xs tracking-wide px-3 sm:px-5 py-2 sm:py-2.5 clip-∠ border border-[color:var(--border-line)] text-[color:var(--body-text)] hover:text-white hover:border-[#c4d0dc]/50 transition-all whitespace-nowrap" data-status="completed">COMPLETED</button>
+        </div>
       </div>
     </div>
 
@@ -90,7 +94,7 @@
 </section>
 
 <!-- FOOTER -->
-<footer class="relative border-t border-[color:var(--border-line)] px-6 lg:px-10 pt-16 pb-8 mt-16">
+<footer class="relative border-t border-[color:var(--border-line)] px-6 lg:px-10 pt-14 md:pt-16 pb-8 mt-14 md:mt-16">
   <div class="absolute inset-0 pointer-events-none opacity-[0.035]">
     <img src="crest.png" alt="" class="h-80 w-auto object-contain" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);filter:grayscale(1);">
   </div>
@@ -121,9 +125,9 @@
       </ul>
     </div>
   </div>
-  <div class="relative max-w-7xl mx-auto pt-6 border-t border-[color:var(--border-line)] flex flex-col sm:flex-row items-center justify-between gap-3 font-body text-xs text-[color:var(--body-text)]">
-    <p>© 2026 Webmasters Esports Banilad · University of Cebu – Banilad.</p>
-    <p>Built by the Webmasters student org.</p>
+  <div class="relative max-w-7xl mx-auto pt-6 border-t border-[color:var(--border-line)] flex flex-col sm:flex-row items-center justify-between gap-3 font-body text-xs text-[color:var(--body-text)] text-center sm:text-left">
+    <p class="break-words">© 2026 Webmasters Esports Banilad · University of Cebu – Banilad.</p>
+    <p class="break-words">Built by the Webmasters student org.</p>
   </div>
 </footer>
 
@@ -225,25 +229,25 @@
         const row = document.createElement("div");
         row.className = `match-card panel clip-∠ p-5 md:p-6 ${statusCl} reveal`;
         row.innerHTML = `
-          <div class="grid grid-cols-1 md:grid-cols-[120px_1fr_120px_auto] items-center gap-5 md:gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-[120px_1fr_120px_auto] items-center gap-3 sm:gap-5 md:gap-6">
             <div class="flex flex-col items-center gap-1.5">
               <img src="crest.png" alt="Webmasters" class="h-12 w-12 object-contain crest-glow">
               <span class="font-display text-xs text-white text-center leading-tight">WEBMASTERS</span>
             </div>
-            <div class="flex items-center justify-center">
+            <div class="flex items-center justify-center min-w-0">
               <div class="flex items-center gap-3 font-display text-xs text-[color:var(--body-text)] tracking-widest">
-                <span class="w-10 h-10 rounded-full bg-gradient-to-br from-[#0f2540] to-[#132c4e] border border-[color:var(--border-line)] flex items-center justify-center text-[color:var(--cyan)] font-bold">WM</span>
+                <span class="w-10 h-10 rounded-full bg-gradient-to-br from-[#0f2540] to-[#132c4e] border border-[color:var(--border-line)] flex items-center justify-center text-[color:var(--cyan)] font-bold shrink-0">WM</span>
                 <span class="${isLive ? "text-red-400 animate-pulse" : "text-[color:var(--body-text)]"}">VS</span>
-                <span class="w-10 h-10 rounded-full bg-gradient-to-br from-[#1a080a] to-[#2a1010] border border-[color:var(--border-line)] flex items-center justify-center text-[color:${accent}] font-bold">${badge}</span>
+                <span class="w-10 h-10 rounded-full bg-gradient-to-br from-[#1a080a] to-[#2a1010] border border-[color:var(--border-line)] flex items-center justify-center text-[color:${accent}] font-bold shrink-0">${badge}</span>
               </div>
             </div>
-            <div class="flex flex-col items-center gap-1.5">
-              <span class="font-display text-lg md:text-xl font-bold text-white text-center">${escapeHtml(opp)}</span>
-              <span class="font-display text-[10px] px-2.5 py-1 rounded-sm border border-[color:var(--border-line)]" style="color:${accent}">${gameLabel(gameKey)}</span>
+            <div class="flex flex-col items-center gap-1.5 min-w-0 max-w-full">
+              <span class="font-display text-base sm:text-lg md:text-xl font-bold text-white text-center break-words">${escapeHtml(opp)}</span>
+              <span class="font-display text-[10px] px-2.5 py-1 rounded-sm border border-[color:var(--border-line)] whitespace-nowrap" style="color:${accent}">${gameLabel(gameKey)}</span>
             </div>
-            <div class="flex flex-col gap-2 items-end">
-              <span class="font-body text-[10px] text-[color:var(--body-text)]">${formatDate(datetime)}</span>
-              <span class="font-display text-[10px] px-2.5 py-1 rounded-sm ${sKey === "live" ? "bg-red-500/15 text-red-400" : sKey === "upcoming" ? "bg-cyan-500/10 text-[color:var(--cyan)]" : "bg-[#4dcdf3]/10 text-[color:var(--body-text)]"}">${statusLabel(status)}</span>
+            <div class="flex flex-col gap-2 items-center md:items-end min-w-0">
+              <span class="font-body text-xs sm:text-[10px] text-[color:var(--body-text)] text-center md:text-right break-words">${formatDate(datetime)}</span>
+              <span class="font-display text-[10px] px-2.5 py-1 rounded-sm whitespace-nowrap ${sKey === "live" ? "bg-red-500/15 text-red-400" : sKey === "upcoming" ? "bg-cyan-500/10 text-[color:var(--cyan)]" : "bg-[#4dcdf3]/10 text-[color:var(--body-text)]"}">${statusLabel(status)}</span>
               ${link ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener" class="font-body text-xs text-[color:var(--cyan)] hover:text-white transition whitespace-nowrap">${escapeHtml(linkText || "Watch →")} →</a>` : `<span class="font-body text-xs text-[color:var(--body-text)]">—</span>`}
             </div>
           </div>

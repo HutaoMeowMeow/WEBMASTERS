@@ -202,12 +202,15 @@ body{
 
 /* ===== SECTION / TYPOGRAPHY ===== */
 .section-title{
-  font-size:2.25rem;
-  line-height:0.9;
-  letter-spacing:-0.02em;
+  font-size:1.875rem;
+  line-height:1;
+  letter-spacing:-0.01em;
+  word-break:break-word;
+  overflow-wrap:anywhere;
 }
-@media(min-width:768px){.section-title{font-size:3rem}}
-@media(min-width:1024px){.section-title{font-size:3.75rem}}
+@media(min-width:480px){.section-title{font-size:2.25rem;}}
+@media(min-width:768px){.section-title{font-size:3rem;letter-spacing:-0.02em;line-height:0.9;}}
+@media(min-width:1024px){.section-title{font-size:3.75rem;}}
 .section-eyebrow{
   font-size:0.65rem;
   letter-spacing:0.25em;
@@ -427,5 +430,27 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offse
   #nav-links.open{display:flex;}
   #nav-links a{padding:0.5rem 0;font-size:0.875rem;}
   .schedule-row,.match-admin-row,.roster-admin-row{grid-template-columns:1fr !important;gap:0.25rem !important;}
-  .section-title{font-size:2rem;}
+  .section-title{font-size:1.75rem;letter-spacing:-0.01em;}
+  .game-card::after{font-size:2.75rem;}
+  .num-glow{text-shadow:0 0 8px rgba(77,205,255,0.45),0 0 18px rgba(0,163,255,0.18);}
+  .achievement-card:hover,.roster-card:hover,.news-card:hover,.match-card:hover,.game-card:hover,.player-card:hover{transform:none;}
+}
+
+/* ===== Filter / status tab buttons (matches.html) ===== */
+.filter-btn.active, .status-btn.active{
+  background:rgba(77,205,255,0.12);
+  color:var(--white);
+  border-color:var(--cyan);
+  box-shadow:0 0 14px rgba(0,163,255,0.18);
+}
+.filter-btn.active[data-status="live"], .status-btn.active[data-status="live"]{
+  background:rgba(255,70,85,0.12);
+  border-color:#ff4655;
+  color:#ff8a93;
+  box-shadow:0 0 14px rgba(255,70,85,0.22);
+}
+.filter-btn.active[data-status="completed"], .status-btn.active[data-status="completed"]{
+  background:rgba(196,208,220,0.08);
+  border-color:rgba(196,208,220,0.45);
+  color:var(--white);
 }
