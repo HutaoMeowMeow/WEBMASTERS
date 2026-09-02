@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Us — Webmasters Esports Banilad</title>
+<title>About — Webmasters Esports Banilad</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -25,10 +25,10 @@
 
 <!-- NAV -->
 <header class="fixed top-0 inset-x-0 z-50">
-  <div class="border-b border-[color:var(--border-line)]" style="background:rgba(5,8,20,0.85); backdrop-filter:blur(16px);">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between relative">
+  <div class="border-b border-[color:var(--border-line)]" style="background:rgba(5,8,20,0.82);backdrop-filter:blur(18px);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-3 shrink-0">
-        <img src="crest.png" alt="Webmasters Esports crest" class="h-11 w-11 object-contain">
+        <img src="crest.png" alt="Webmasters Esports crest" class="h-10 w-10 object-contain">
         <div class="leading-tight hidden sm:block">
           <p class="font-display text-sm tracking-wide text-white">WEBMASTERS</p>
           <p class="font-body text-[11px] tracking-[0.25em] text-[color:var(--cyan)]">ESPORTS BANILAD</p>
@@ -37,86 +37,225 @@
       <button id="mobile-menu-btn" class="md:hidden text-white p-2" aria-label="Open menu">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       </button>
-      <nav id="nav-links" class="hidden md:flex items-center gap-9 font-body text-sm text-[color:var(--chrome)]">
-        <a href="index.html" class="hover:text-white transition-colors">Home</a>
-        <a href="teams.html" class="hover:text-white transition-colors">Teams</a>
-        <a href="matches.html" class="hover:text-white transition-colors">Matches</a>
-        <a href="news.html" class="hover:text-white transition-colors">News</a>
-        <a href="about.html" class="hover:text-white transition-colors">About Us</a>
+      <nav id="nav-links" class="hidden md:flex items-center gap-8 font-body text-sm">
+        <a href="index.html" class="nav-link">HOME</a>
+        <a href="teams.html" class="nav-link">TEAMS</a>
+        <a href="matches.html" class="nav-link">MATCHES</a>
+        <a href="news.html" class="nav-link">NEWS</a>
+        <a href="about.html" class="nav-link active">ABOUT</a>
       </nav>
-      <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="btn-primary font-display text-xs tracking-wide px-5 py-2.5 clip-角 hover:opacity-95 transition hidden md:inline-block">
-        JOIN DISCORD
-      </a>
+      <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="btn-primary font-display text-xs tracking-wide px-5 py-2.5 clip-角 hover:opacity-95 transition hidden md:inline-block">JOIN DISCORD</a>
     </div>
     <div id="mobile-menu" class="hidden md:hidden border-t border-[color:var(--border-line)] px-6 py-4 space-y-3">
       <a href="index.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">Home</a>
       <a href="teams.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">Teams</a>
       <a href="matches.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">Matches</a>
       <a href="news.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">News</a>
-      <a href="about.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">About Us</a>
+      <a href="about.html" class="block font-body text-sm font-medium text-white transition-colors">About</a>
       <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="block font-body text-sm text-[color:var(--cyan)] hover:text-white transition-colors">Join Discord</a>
     </div>
   </div>
 </header>
 
-<!-- ABOUT -->
-<section id="about" class="relative py-24 px-6 lg:px-10 border-t border-[color:var(--border-line)]">
-  <div class="max-w-7xl mx-auto">
-    <div class="mb-16 reveal">
-      <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-6">ABOUT WEBMASTERS</h2>
-      <p class="font-body text-lg text-[color:var(--chrome)] max-w-3xl leading-relaxed">
-        The official esports organization of the University of Cebu – Banilad, formed under the Webmasters student body. We compete across Valorant, Mobile Legends and League of Legends, representing our university with pride, discipline, and competitive spirit.
-      </p>
-    </div>
+<!-- ABOUT HERO -->
+<section class="relative pt-32 pb-24 px-6 lg:px-10 overflow-hidden">
+  <div class="absolute inset-0 grid-overlay opacity-25"></div>
+  <div class="absolute inset-0 glow-radial"></div>
+  <div class="absolute inset-0 perspective-floor"></div>
+  <div class="streak" style="left:12%;top:-4%;height:50%;transform:rotate(14deg);opacity:0.32;"></div>
+  <div class="streak" style="right:14%;bottom:6%;height:38%;transform:rotate(-10deg);opacity:0.24;"></div>
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.045]">
+    <img src="crest.png" alt="" class="h-96 w-auto">
+  </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-20">
-      <div class="reveal">
-        <div class="flex items-center gap-3 mb-4">
-          <img src="crest.png" alt="Webmasters Esports crest" class="h-9 w-9 object-contain">
-          <span class="font-display text-sm text-white tracking-wide">WEBMASTERS ESPORTS</span>
+  <div class="relative max-w-5xl mx-auto text-center z-10">
+    <div class="mb-10 reveal">
+      <img src="crest.png" alt="Webmasters Esports Banilad crest" class="mx-auto h-24 md:h-32 w-auto object-contain crest-glow">
+    </div>
+    <div class="reveal reveal-delay-1">
+      <p class="font-display section-eyebrow">ABOUT US</p>
+      <h1 class="font-display section-title font-black text-white mb-3">WEBMASTERS ESPORTS</h1>
+      <p class="font-display text-2xl md:text-3xl text-[color:var(--chrome)] tracking-[0.3em]">UNIVERSITY OF CEBU — BANILAD</p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- WHO WE ARE -->
+<section class="relative py-24 px-6 lg:px-10">
+  <div class="max-w-7xl mx-auto">
+    <div class="lg:grid lg:grid-cols-5 gap-12 items-center">
+      <div class="lg:col-span-3 reveal">
+        <p class="font-display section-eyebrow mb-3">Who We Are</p>
+        <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-6">The Webmasters identity</h2>
+        <p class="font-body text-lg text-[color:var(--body-text)] leading-relaxed mb-6">
+          The official esports organization of the University of Cebu – Banilad, formed under the Webmasters student body.
+        </p>
+        <p class="font-body text-lg text-[color:var(--body-text)] leading-relaxed">
+          We compete across Valorant and Mobile Legends: Bang Bang, representing our university with discipline, teamwork and competitive spirit. We are builders, competitors and community — forged under one crest and one banner.
+        </p>
+      </div>
+      <div class="lg:col-span-2 reveal reveal-delay-1 mt-8 lg:mt-0 flex justify-center">
+        <div class="relative">
+          <img src="crest.png" alt="Webmasters Esports crest" class="h-48 w-48 object-contain opacity-80">
+          <div class="absolute -inset-6 bg-[color:var(--cyan)] opacity-10 blur-3xl rounded-full"></div>
         </div>
-        <p class="font-body text-sm max-w-xs text-[color:var(--chrome)]">The official esports organization of the University of Cebu – Banilad, formed under the Webmasters student body.</p>
       </div>
-      <div class="reveal reveal-delay-1">
-        <p class="font-display text-xs text-[color:var(--cyan)] tracking-wide mb-4">Navigate</p>
-        <ul class="font-body text-sm space-y-2.5">
-          <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
-          <li><a href="teams.html" class="hover:text-white transition-colors">Teams</a></li>
-          <li><a href="matches.html" class="hover:text-white transition-colors">Matches</a></li>
-          <li><a href="news.html" class="hover:text-white transition-colors">News</a></li>
-          <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
-        </ul>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- PURPOSE -->
+<section class="relative py-24 px-6 lg:px-10">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <p class="font-display section-eyebrow">Our Purpose</p>
+      <h2 class="font-display section-title font-black text-white mb-3">MISSION · VISION · VALUES</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="panel clip-角 p-8 text-center reveal reveal-delay-1">
+        <div class="font-display text-xs tracking-[0.3em] text-[color:var(--cyan)] uppercase mb-3">Mission</div>
+         <p class="font-body text-sm text-[color:var(--body-text)] italic">
+          To compete at the highest collegiate level while representing the University of Cebu – Banilad with integrity and excellence.
+        </p>
+        <p class="font-display text-[10px] tracking-widest text-[color:var(--chrome)] opacity-40 uppercase mt-2">Draft — pending official statement</p>
       </div>
-      <div class="reveal reveal-delay-2">
-        <p class="font-display text-xs text-[color:var(--cyan)] tracking-wide mb-4">Follow the Team</p>
-        <ul class="font-body text-sm space-y-2.5">
-          <li><a href="https://www.facebook.com/webmastersesports" target="_blank" rel="noopener" class="hover:text-white transition-colors">Facebook</a></li>
-          <li><a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="hover:text-white transition-colors">Discord</a></li>
+      <div class="panel clip-角 p-8 text-center reveal reveal-delay-2">
+        <div class="font-display text-xs tracking-[0.3em] text-[color:var(--cyan)] uppercase mb-3">Vision</div>
+         <p class="font-body text-sm text-[color:var(--body-text)] italic">
+          To be recognized as Cebu's premier collegiate esports program — disciplined, feared, and respected.
+        </p>
+        <p class="font-display text-[10px] tracking-widest text-[color:var(--chrome)] opacity-40 uppercase mt-2">Draft — pending official statement</p>
+      </div>
+      <div class="panel clip-角 p-8 text-center reveal reveal-delay-3">
+        <div class="font-display text-xs tracking-[0.3em] text-[color:var(--cyan)] uppercase mb-3">Values</div>
+        <ul class="font-body text-sm text-[color:var(--body-text)] space-y-2 text-left">
+          <li><span class="text-[color:var(--cyan)]">●</span> Competitive excellence</li>
+          <li><span class="text-[color:var(--cyan)]">●</span> Discipline &amp; teamwork</li>
+          <li><span class="text-[color:var(--cyan)]">●</span> Community &amp; representation</li>
+          <li><span class="text-[color:var(--cyan)]">●</span> Growth &amp; integrity</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<footer class="relative border-t border-[color:var(--border-line)] px-6 lg:px-10 pt-16 pb-8">
-  <div class="max-w-7xl mx-auto pt-6 border-t border-[color:var(--border-line)] flex flex-col sm:flex-row items-center justify-between gap-3 font-body text-xs text-[color:var(--chrome)]">
-    <p>© 2026 Webmasters Esports Banilad. University of Cebu – Banilad.</p>
+<div class="section-divider"></div>
+
+<!-- OUR GAMES -->
+<section class="relative py-24 px-6 lg:px-10">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16 reveal">
+      <p class="font-display section-eyebrow">Disciplines</p>
+      <h2 class="font-display section-title font-black text-white mb-3">OUR GAMES</h2>
+      <p class="font-body text-base text-[color:var(--body-text)] max-w-2xl mx-auto">Valorant and Mobile Legends: Bang Bang — the only competitive battlegrounds we contest.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="panel clip-角 overflow-hidden division-valorant reveal reveal-delay-1">
+        <div class="relative h-56">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#2a0a0a]/85 via-[#1a0707]/75 to-[#0a0a14]/90"></div>
+          <img src="crest.png" alt="Webmasters crest" class="absolute inset-0 w-full h-full object-contain opacity-10">
+          <div class="absolute inset-0 flex flex-col items-center justify-center">
+            <span class="font-display text-5xl font-black text-white opacity-10">VALORANT</span>
+          </div>
+          <div class="relative z-10 p-6">
+            <h3 class="font-display text-2xl font-bold text-white">VALORANT</h3>
+            <p class="font-body text-sm text-[color:var(--body-text)] mt-2">Tactical 5v5 shooter where precision and comms win rounds. <a href="teams.html#valorant" class="text-[color:var(--accent-valorant)] hover:text-white transition font-semibold">Meet the squad →</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="panel clip-角 overflow-hidden division-mlbb reveal reveal-delay-2">
+        <div class="relative h-56">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#0a1a2a]/85 via-[#071b26]/75 to-[#06141e]/90"></div>
+          <img src="crest.png" alt="Webmasters crest" class="absolute inset-0 w-full h-full object-contain opacity-10">
+          <div class="absolute inset-0 flex flex-col items-center justify-center">
+            <span class="font-display text-5xl font-black text-white opacity-10">MLBB</span>
+          </div>
+          <div class="relative z-10 p-6">
+            <h3 class="font-display text-2xl font-bold text-white">MOBILE LEGENDS</h3>
+            <p class="font-body text-sm text-[color:var(--body-text)] mt-2">Five-versus-five MOBA of macro, mechanics and mind games. <a href="teams.html#mlbb" class="text-[color:var(--accent-mlbb)] hover:text-white transition font-semibold">Meet the squad →</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- THE ROAD AHEAD -->
+<section class="relative py-24 px-6 lg:px-10">
+  <div class="max-w-5xl mx-auto text-center">
+    <div class="mb-10 reveal">
+      <p class="font-display section-eyebrow">Forward</p>
+      <h2 class="font-display section-title font-black text-white mb-3">THE JOURNEY STARTS NOW</h2>
+      <p class="font-body text-lg text-[color:var(--body-text)] max-w-2xl mx-auto">
+        Webmasters Esports is newly established. We are building competitive rosters, preparing for scrims and tournament play, and representing Banilad on every map, in every game.
+      </p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 reveal reveal-delay-1">
+      <div class="panel clip-角 p-6 text-center">
+        <div class="font-display text-3xl font-bold text-[color:var(--cyan)] num-glow">2</div>
+        <div class="font-body text-xs text-[color:var(--body-text)] mt-1">Games</div>
+      </div>
+      <div class="panel clip-角 p-6 text-center">
+        <div class="font-display text-3xl font-bold text-[color:var(--cyan)] num-glow">1</div>
+        <div class="font-body text-xs text-[color:var(--body-text)] mt-1">Campus</div>
+      </div>
+      <div class="panel clip-角 p-6 text-center">
+        <div class="font-display text-3xl font-bold text-[color:var(--cyan)] num-glow">∞</div>
+        <div class="font-body text-xs text-[color:var(--body-text)] mt-1">Potential</div>
+      </div>
+      <div class="panel clip-角 p-6 text-center">
+        <div class="font-display text-3xl font-bold text-[color:var(--cyan)] num-glow">—</div>
+        <div class="font-body text-xs text-[color:var(--body-text)] mt-1">Championships</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="relative border-t border-[color:var(--border-line)] px-6 lg:px-10 pt-16 pb-8 mt-16">
+  <div class="absolute inset-0 pointer-events-none opacity-[0.035]">
+    <img src="crest.png" alt="" class="h-80 w-auto object-contain" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);filter:grayscale(1);">
+  </div>
+  <div class="absolute inset-0 pointer-events-none" style="background:rgba(5,8,20,0.6);"></div>
+  <div class="relative max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+    <div class="reveal">
+      <div class="flex items-center gap-3 mb-4">
+        <img src="crest.png" alt="Webmasters Esports crest" class="h-10 w-10 object-contain">
+        <span class="font-display text-sm text-white tracking-wide">WEBMASTERS ESPORTS</span>
+      </div>
+      <p class="font-body text-sm text-[color:var(--body-text)] max-w-xs">The official esports organization of the University of Cebu – Banilad. Competing across Valorant and Mobile Legends: Bang Bang.</p>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <p class="font-display text-xs text-[color:var(--cyan)] tracking-wide mb-4">NAVIGATION</p>
+      <ul class="font-body text-sm space-y-2.5">
+        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+        <li><a href="teams.html" class="hover:text-white transition-colors">Teams</a></li>
+        <li><a href="matches.html" class="hover:text-white transition-colors">Matches</a></li>
+        <li><a href="news.html" class="hover:text-white transition-colors">News</a></li>
+        <li><a href="about.html" class="font-medium text-white">About</a></li>
+      </ul>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <p class="font-display text-xs text-[color:var(--cyan)] tracking-wide mb-4">FOLLOW</p>
+      <ul class="font-body text-sm space-y-2.5">
+        <li><a href="https://www.facebook.com/webmastersesports" target="_blank" rel="noopener" class="hover:text-white transition-colors">Facebook</a></li>
+        <li><a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="hover:text-white transition-colors">Discord</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="relative max-w-7xl mx-auto pt-6 border-t border-[color:var(--border-line)] flex flex-col sm:flex-row items-center justify-between gap-3 font-body text-xs text-[color:var(--body-text)]">
+    <p>© 2026 Webmasters Esports Banilad · University of Cebu – Banilad.</p>
     <p>Built by the Webmasters student org.</p>
   </div>
 </footer>
 
 <script src="main.js"></script>
-
-<script>
-  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-  const mobileMenu = document.getElementById("mobile-menu");
-  mobileMenuBtn.addEventListener("click", () => {
-    mobileMenu.classList.toggle("hidden");
-  });
-  document.querySelectorAll("#mobile-menu a").forEach(link => {
-    link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
-  });
-</script>
-
 </body>
 </html>

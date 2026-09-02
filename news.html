@@ -25,10 +25,10 @@
 
 <!-- NAV -->
 <header class="fixed top-0 inset-x-0 z-50">
-  <div class="border-b border-[color:var(--border-line)]" style="background:rgba(5,8,20,0.85); backdrop-filter:blur(16px);">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between relative">
+  <div class="border-b border-[color:var(--border-line)]" style="background:rgba(5,8,20,0.82);backdrop-filter:blur(18px);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-3 shrink-0">
-        <img src="crest.png" alt="Webmasters Esports crest" class="h-11 w-11 object-contain">
+        <img src="crest.png" alt="Webmasters Esports crest" class="h-10 w-10 object-contain">
         <div class="leading-tight hidden sm:block">
           <p class="font-display text-sm tracking-wide text-white">WEBMASTERS</p>
           <p class="font-body text-[11px] tracking-[0.25em] text-[color:var(--cyan)]">ESPORTS BANILAD</p>
@@ -37,34 +37,56 @@
       <button id="mobile-menu-btn" class="md:hidden text-white p-2" aria-label="Open menu">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       </button>
-      <nav id="nav-links" class="hidden md:flex items-center gap-9 font-body text-sm text-[color:var(--chrome)]">
-        <a href="index.html" class="hover:text-white transition-colors">Home</a>
-        <a href="teams.html" class="hover:text-white transition-colors">Teams</a>
-        <a href="matches.html" class="hover:text-white transition-colors">Matches</a>
-        <a href="news.html" class="hover:text-white transition-colors">News</a>
-        <a href="about.html" class="hover:text-white transition-colors">About Us</a>
+      <nav id="nav-links" class="hidden md:flex items-center gap-8 font-body text-sm">
+        <a href="index.html" class="nav-link">HOME</a>
+        <a href="teams.html" class="nav-link">TEAMS</a>
+        <a href="matches.html" class="nav-link">MATCHES</a>
+        <a href="news.html" class="nav-link active">NEWS</a>
+        <a href="about.html" class="nav-link">ABOUT</a>
       </nav>
-      <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="btn-primary font-display text-xs tracking-wide px-5 py-2.5 clip-角 hover:opacity-95 transition hidden md:inline-block">
-        JOIN DISCORD
-      </a>
+      <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="btn-primary font-display text-xs tracking-wide px-5 py-2.5 clip-角 hover:opacity-95 transition hidden md:inline-block">JOIN DISCORD</a>
     </div>
     <div id="mobile-menu" class="hidden md:hidden border-t border-[color:var(--border-line)] px-6 py-4 space-y-3">
       <a href="index.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">Home</a>
       <a href="teams.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">Teams</a>
       <a href="matches.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">Matches</a>
-      <a href="news.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">News</a>
-      <a href="about.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">About Us</a>
+      <a href="news.html" class="block font-body text-sm font-medium text-white transition-colors">News</a>
+      <a href="about.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">About</a>
       <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="block font-body text-sm text-[color:var(--cyan)] hover:text-white transition-colors">Join Discord</a>
     </div>
   </div>
 </header>
 
-<!-- GALLERY / MEDIA -->
-<section id="news" class="relative py-24 px-6 lg:px-10 border-t border-[color:var(--border-line)]">
+<!-- NEWSROOM -->
+<section class="relative pt-32 pb-16 px-6 lg:px-10">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <p class="font-display text-xs tracking-[0.3em] text-[color:var(--cyan)] uppercase mb-3">The Webmasters Media Room</p>
+      <h1 class="font-display section-title font-black text-white mb-3">NEWS</h1>
+      <p class="font-body text-base text-[color:var(--body-text)] max-w-2xl mx-auto">Milestones, fixtures and behind-the-scenes moments from the Webmasters bench.</p>
+    </div>
+
+    <div id="featured-story" class="reveal reveal-delay-1">
+      <p class="font-body text-sm text-center">Loading stories…</p>
+    </div>
+
+    <div class="mt-16 reveal reveal-delay-2">
+      <h2 class="font-display text-xl text-white mb-6">RECENT STORIES</h2>
+      <div id="stories-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- MEDIA GALLERY -->
+<section id="media" class="relative py-24 px-6 lg:px-10">
   <div class="max-w-7xl mx-auto">
     <div class="mb-12 reveal">
-      <h2 class="font-display text-3xl md:text-4xl font-bold text-white">Gallery</h2>
-      <p class="font-body text-sm mt-2 max-w-md">Scrims, tournament days and behind-the-scenes moments from the org.</p>
+      <p class="font-display text-xs tracking-[0.3em] text-[color:var(--cyan)] uppercase mb-3">Media</p>
+      <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-3">PHOTO GALLERY</h2>
+      <p class="font-body text-sm text-[color:var(--body-text)] max-w-md">Scrims, tournament days and behind-the-scenes moments from the org.</p>
     </div>
 
     <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 gap-5">
@@ -77,90 +99,143 @@
   </div>
 </section>
 
-<!-- ACHIEVEMENTS -->
-<section id="achievements" class="relative py-24 px-6 lg:px-10 border-t border-[color:var(--border-line)]">
-  <div class="max-w-7xl mx-auto">
-    <div class="mb-12 reveal">
-      <h2 class="font-display text-3xl md:text-4xl font-bold text-white">Achievements</h2>
-      <p class="font-body text-sm mt-2 max-w-md">Our org's milestones, championships, and tournament victories.</p>
-    </div>
-    <div id="achievements-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <p class="font-body text-sm col-span-full">Loading achievements…</p>
-    </div>
-  </div>
-</section>
-
-<!-- NEXT EVENT -->
-<section id="next-event" class="relative py-24 px-6 lg:px-10 border-t border-[color:var(--border-line)]">
-  <div class="max-w-7xl mx-auto">
-    <div class="mb-12 reveal">
-      <h2 class="font-display text-3xl md:text-4xl font-bold text-white">Next Event</h2>
-      <p class="font-body text-sm mt-2 max-w-md">Our upcoming match or event — be there.</p>
-    </div>
-    <div id="next-event-card" class="panel clip-角 p-8 max-w-3xl reveal">
-      <p class="font-body text-sm text-[color:var(--chrome)]">Loading next event…</p>
-    </div>
-  </div>
-</section>
-
-<div id="lightbox" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 backdrop-blur-sm p-6" role="dialog" aria-modal="true">
-  <button id="lightbox-close" class="absolute top-5 right-5 text-white/80 hover:text-white font-display text-xs tracking-wide px-3 py-2 z-10">CLOSE</button>
-  <img id="lightbox-img" src="" alt="Gallery photo" class="max-w-full max-h-full object-contain shadow-2xl">
-</div>
-
 <!-- FOOTER -->
-<footer id="about" class="relative border-t border-[color:var(--border-line)] px-6 lg:px-10 pt-16 pb-8">
-  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
-    <div>
+<footer class="relative border-t border-[color:var(--border-line)] px-6 lg:px-10 pt-16 pb-8 mt-16">
+  <div class="absolute inset-0 pointer-events-none opacity-[0.035]">
+    <img src="crest.png" alt="" class="h-80 w-auto object-contain" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);filter:grayscale(1);">
+  </div>
+  <div class="absolute inset-0 pointer-events-none" style="background:rgba(5,8,20,0.6);"></div>
+  <div class="relative max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+    <div class="reveal">
       <div class="flex items-center gap-3 mb-4">
-        <img src="crest.png" alt="Webmasters Esports crest" class="h-9 w-9 object-contain">
+        <img src="crest.png" alt="Webmasters Esports crest" class="h-10 w-10 object-contain">
         <span class="font-display text-sm text-white tracking-wide">WEBMASTERS ESPORTS</span>
       </div>
-      <p class="font-body text-sm max-w-xs">The official esports organization of the University of Cebu – Banilad, formed under the Webmasters student body.</p>
+      <p class="font-body text-sm text-[color:var(--body-text)] max-w-xs">The official esports organization of the University of Cebu – Banilad. Competing across Valorant and Mobile Legends: Bang Bang.</p>
     </div>
-    <div>
-      <p class="font-display text-xs text-[color:var(--cyan)] tracking-wide mb-4">Navigate</p>
+    <div class="reveal reveal-delay-1">
+      <p class="font-display text-xs text-[color:var(--cyan)] tracking-wide mb-4">NAVIGATION</p>
       <ul class="font-body text-sm space-y-2.5">
         <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
         <li><a href="teams.html" class="hover:text-white transition-colors">Teams</a></li>
         <li><a href="matches.html" class="hover:text-white transition-colors">Matches</a></li>
-        <li><a href="news.html" class="hover:text-white transition-colors">News</a></li>
-        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+        <li><a href="news.html" class="font-medium text-white">News</a></li>
+        <li><a href="about.html" class="hover:text-white transition-colors">About</a></li>
       </ul>
     </div>
-    <div>
-      <p class="font-display text-xs text-[color:var(--cyan)] tracking-wide mb-4">Follow the Team</p>
+    <div class="reveal reveal-delay-2">
+      <p class="font-display text-xs text-[color:var(--cyan)] tracking-wide mb-4">FOLLOW</p>
       <ul class="font-body text-sm space-y-2.5">
         <li><a href="https://www.facebook.com/webmastersesports" target="_blank" rel="noopener" class="hover:text-white transition-colors">Facebook</a></li>
         <li><a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="hover:text-white transition-colors">Discord</a></li>
       </ul>
     </div>
   </div>
-  <div class="max-w-7xl mx-auto pt-6 border-t border-[color:var(--border-line)] flex flex-col sm:flex-row items-center justify-between gap-3 font-body text-xs text-[color:var(--chrome)]">
-    <p>© 2026 Webmasters Esports Banilad. University of Cebu – Banilad.</p>
+  <div class="relative max-w-7xl mx-auto pt-6 border-t border-[color:var(--border-line)] flex flex-col sm:flex-row items-center justify-between gap-3 font-body text-xs text-[color:var(--body-text)]">
+    <p>© 2026 Webmasters Esports Banilad · University of Cebu – Banilad.</p>
     <p>Built by the Webmasters student org.</p>
   </div>
 </footer>
 
+<div id="lightbox" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 backdrop-blur-sm p-6" role="dialog" aria-modal="true">
+  <button id="lightbox-close" class="absolute top-5 right-5 text-white/80 hover:text-white font-display text-xs tracking-wide px-3 py-2 z-10">CLOSE</button>
+  <img id="lightbox-img" src="" alt="Gallery photo" class="max-w-full max-h-full object-contain shadow-2xl">
+</div>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-  import { getFirestore, collection, query, orderBy, limit, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import { getFirestore, collection, query, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
   import { firebaseConfig } from "./firebase-config.js";
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-  const grid = document.getElementById("gallery-grid");
+
+  function escapeHtml(str) {
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  function formatDate(val) {
+    if (!val) return "";
+    const d = new Date(val);
+    if (isNaN(d)) return val;
+    return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  }
+
+  async function loadAchievements() {
+    const featured = document.getElementById("featured-story");
+    const grid = document.getElementById("stories-grid");
+    featured.innerHTML = '<p class="font-body text-sm text-center">Loading stories…</p>';
+    try {
+      const q = query(collection(db, "achievements"), orderBy("year", "desc"), limit(12));
+      const snap = await getDocs(q);
+      const docs = snap.docs;
+
+      if (docs.length === 0) {
+        featured.innerHTML = `
+          <div class="panel clip-角 p-12 text-center">
+            <p class="font-display text-3xl md:text-4xl text-white mb-3">NO STORIES YET</p>
+            <p class="font-body text-sm text-[color:var(--body-text)] max-w-md mx-auto">We're writing the first chapters of the Webmasters legacy. Stories, matches and milestones are on the way.</p>
+          </div>`;
+        grid.innerHTML = "";
+        return;
+      }
+
+      const head = docs[0].data();
+      const rest = docs.slice(1);
+
+      featured.innerHTML = `
+        <div class="achievement-card news-card panel clip-角 overflow-hidden reveal">
+          <div class="relative">
+            ${head.imageData ? `<img src="${head.imageData}" alt="${escapeHtml(head.title || "")}" class="w-full h-64 md:h-80 object-cover">` : `<div class="w-full h-64 md:h-80 bg-gradient-to-br from-[#0a1220] to-[#050814] flex items-center justify-center"><span class="font-display text-4xl text-[color:var(--cyan)]">WEBMASTERS</span></div>`}
+            <div class="absolute inset-0 bg-gradient-to-t from-[#02040d] via-transparent to-transparent"></div>
+            <span class="absolute top-6 left-6 font-display text-[10px] tracking-widest text-[color:var(--cyan)] bg-[color:var(--bg-glass)] border border-[color:var(--border-line)] px-3 py-1.5 clip-角">MILESTONE</span>
+            <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-[#02040d] via-[#02040d]/90 to-transparent">
+              <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-3">${escapeHtml(head.title || "")}</h2>
+              <p class="font-body text-xs text-[color:var(--body-text)] mb-4">${escapeHtml(head.year || "")}</p>
+              <button type="button" class="font-display text-xs tracking-wide text-[color:var(--cyan)] hover:text-white transition">READ STORY →</button>
+            </div>
+          </div>
+        </div>`;
+
+      grid.innerHTML = rest.length === 0
+        ? `<p class="font-body text-sm text-[color:var(--body-text)] col-span-full">More stories are on the way.</p>`
+        : rest.map(d => {
+            const data = d.data();
+            return `
+              <div class="achievement-card news-card panel clip-角 overflow-hidden reveal">
+                <div class="relative">
+                  ${data.imageData ? `<img src="${data.imageData}" alt="${escapeHtml(data.title || "")}" class="w-full h-40 object-cover">` : `<div class="w-full h-40 bg-gradient-to-br from-[#0a1220] to-[#050814] flex items-center justify-center font-display text-3xl text-[color:var(--cyan)]">WM</div>`}
+                  <div class="absolute inset-0 bg-gradient-to-t from-[#02040d] via-transparent to-transparent"></div>
+                  <span class="absolute top-3 left-3 font-display text-[9px] tracking-widest text-[color:var(--cyan)] bg-[color:var(--bg-glass)] border border-[color:var(--border-line)] px-2 py-1 clip-角">MILESTONE</span>
+                </div>
+                <div class="p-5 card-body">
+                  <h3 class="font-display text-lg text-white mb-2">${escapeHtml(data.title || "")}</h3>
+                  <p class="font-body text-xs text-[color:var(--body-text)] mb-3">${escapeHtml(data.year || "")}</p>
+                  <button type="button" class="font-display text-[10px] text-[color:var(--cyan)] hover:text-white transition">READ STORY →</button>
+                </div>
+              </div>`;
+          }).join("");
+      if (window.__observeReveals) {
+        window.__observeReveals(document.getElementById("featured-story"));
+        window.__observeReveals(document.getElementById("stories-grid"));
+      }
+    } catch (err) {
+      console.error("Stories failed to load:", err);
+      featured.innerHTML = '<p class="font-body text-sm text-center">Couldn\'t load stories right now.</p>';
+      grid.innerHTML = "";
+    }
+  }
 
   async function loadGallery() {
+    const grid = document.getElementById("gallery-grid");
+    grid.innerHTML = '<p class="font-body text-sm col-span-full">Loading photos…</p>';
     try {
       const q = query(collection(db, "gallery"), orderBy("createdAt", "desc"), limit(30));
       const snap = await getDocs(q);
-
       if (snap.empty) {
         grid.innerHTML = '<p class="font-body text-sm col-span-full">No photos posted yet — check back soon.</p>';
         return;
       }
-
       grid.innerHTML = "";
       snap.forEach(doc => {
         const { imageData, caption } = doc.data();
@@ -170,6 +245,7 @@
         card.addEventListener("click", () => openLightbox(imageData));
         grid.appendChild(card);
       });
+      if (window.__observeReveals) window.__observeReveals(grid);
     } catch (err) {
       console.error("Gallery failed to load:", err);
       grid.innerHTML = '<p class="font-body text-sm col-span-full">Couldn\'t load photos right now.</p>';
@@ -186,103 +262,18 @@
     lightbox.classList.add("flex");
     document.body.style.overflow = "hidden";
   }
-
   function closeLightbox() {
     lightbox.classList.add("hidden");
     lightbox.classList.remove("flex");
     lightboxImg.src = "";
     document.body.style.overflow = "";
   }
+  if (lightboxClose) lightboxClose.addEventListener("click", (e) => { e.stopPropagation(); closeLightbox(); });
+  if (lightbox) lightbox.addEventListener("click", closeLightbox);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
 
-  lightboxClose.addEventListener("click", e => {
-    e.stopPropagation();
-    closeLightbox();
-  });
-
-  lightbox.addEventListener("click", closeLightbox);
-
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape") closeLightbox();
-  });
-
-  async function loadAchievements() {
-    const grid = document.getElementById("achievements-grid");
-    grid.innerHTML = '<p class="font-body text-sm col-span-full">Loading achievements…</p>';
-    try {
-      const q = query(collection(db, "achievements"), orderBy("year", "desc"));
-      const snap = await getDocs(q);
-      grid.innerHTML = "";
-      snap.forEach(docSnap => {
-        const data = docSnap.data();
-        const card = document.createElement("div");
-        card.className = "achievement-card roster-card panel clip-角 overflow-hidden";
-        const imageHtml = data.imageData ? `<img src="${data.imageData}" alt="${escapeHtml(data.title || "")}" class="w-full aspect-video object-contain bg-black/20">` : "";
-        card.innerHTML = `
-          ${imageHtml}
-          <div class="p-6">
-            <p class="font-display text-lg text-white mb-2">${escapeHtml(data.title || "")}</p>
-            <div class="flex items-center gap-3 font-body text-xs text-[color:var(--chrome)]">
-              <span>${escapeHtml(data.year || "")}</span>
-            </div>
-          </div>`;
-        grid.appendChild(card);
-      });
-      if (snap.empty) {
-        grid.innerHTML = '<p class="font-body text-sm col-span-full">No achievements posted yet.</p>';
-      }
-    } catch (err) {
-      console.error("Achievements failed to load:", err);
-      grid.innerHTML = '<p class="font-body text-sm col-span-full">Couldn\'t load achievements right now.</p>';
-    }
-  }
-
-  async function loadNextEvent() {
-    const card = document.getElementById("next-event-card");
-    try {
-      const q = query(collection(db, "events"), orderBy("datetime", "asc"), limit(1));
-      const snap = await getDocs(q);
-      if (snap.empty) {
-        card.innerHTML = '<p class="font-body text-sm text-[color:var(--chrome)]">No upcoming events — check back soon.</p>';
-        return;
-      }
-      const data = snap.docs[0].data();
-      card.innerHTML = `
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <p class="font-display text-xl text-white mb-2">${escapeHtml(data.title || "")}</p>
-            <p class="font-body text-sm text-[color:var(--chrome)]">${formatDate(data.datetime)}${data.location ? " · " + escapeHtml(data.location) : ""}</p>
-          </div>
-          ${data.link ? `<a href="${escapeHtml(data.link)}" target="_blank" rel="noopener" class="btn-primary font-display text-xs tracking-wide px-6 py-3 clip-角 whitespace-nowrap">VIEW DETAILS</a>` : ""}
-        </div>`;
-    } catch (err) {
-      console.error("Next event failed to load:", err);
-      card.innerHTML = '<p class="font-body text-sm text-[color:var(--chrome)]">Couldn\'t load the next event right now.</p>';
-    }
-  }
-
-  function escapeHtml(str) {
-    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
-  }
-
-  function formatDate(val) {
-    if (!val) return "";
-    const d = new Date(val);
-    if (isNaN(d)) return val;
-    return d.toLocaleString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
-  }
-
-  loadGallery();
   loadAchievements();
-  loadNextEvent();
-
-  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-  const mobileMenu = document.getElementById("mobile-menu");
-  mobileMenuBtn.addEventListener("click", () => {
-    mobileMenu.classList.toggle("hidden");
-  });
-  document.querySelectorAll("#mobile-menu a").forEach(link => {
-    link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
-  });
+  loadGallery();
 </script>
 
 <!-- Achievement Modal -->
@@ -294,6 +285,5 @@
 </div>
 
 <script src="main.js"></script>
-
 </body>
 </html>

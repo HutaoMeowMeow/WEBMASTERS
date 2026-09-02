@@ -25,7 +25,10 @@
   .thumb{ aspect-ratio: 1/1; object-fit: contain; background: rgba(0,0,0,0.25); }
 </style>
 </head>
-<body class="min-h-screen">
+<body class="min-h-screen antialiased">
+
+<!-- Scanlines -->
+<div class="scanlines"></div>
 
 <!-- LOGIN VIEW -->
 <div id="login-view" class="min-h-screen flex items-center justify-center px-6">
@@ -58,7 +61,7 @@
     <div class="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between relative">
       <div class="flex items-center gap-3">
         <img src="crest.png" alt="Webmasters Esports crest" class="h-9 w-9 object-contain">
-        <p class="font-display text-sm text-white tracking-wide">GALLERY ADMIN</p>
+        <p class="font-display text-sm text-white tracking-wide">ADMIN</p>
       </div>
       <div class="flex items-center gap-4">
         <span id="user-email" class="font-body text-xs text-[color:var(--chrome)]"></span>
@@ -278,7 +281,7 @@
   import {
     getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
   } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-  import { getFirestore, collection, addDoc, deleteDoc, doc, query, orderBy, getDocs, serverTimestamp, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  import { getFirestore, collection, addDoc, deleteDoc, doc, query, orderBy, getDocs, getDoc, serverTimestamp, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
   import { firebaseConfig } from "./firebase-config.js";
 
   const app = initializeApp(firebaseConfig);
@@ -672,7 +675,7 @@
 
   async function loadStats() {
     try {
-      const snap = await getDocs(doc(db, "stats", "main"));
+      const snap = await getDoc(doc(db, "stats", "main"));
       if (snap.exists()) {
         const data = snap.data();
         document.getElementById("stat-championships").value = data.championships ?? 0;
@@ -710,7 +713,7 @@
 
     document.querySelectorAll(".edit-roster").forEach(btn => {
       btn.addEventListener("click", async () => {
-        const snap = await getDocs(doc(db, "rosters", btn.dataset.id));
+        const snap = await getDoc(doc(db, "rosters", btn.dataset.id));
         if (!snap.exists()) return;
         const data = snap.data();
         document.getElementById("roster-id").value = btn.dataset.id;
@@ -785,7 +788,7 @@
 
     document.querySelectorAll(".edit-achievement").forEach(btn => {
       btn.addEventListener("click", async () => {
-        const snap = await getDocs(doc(db, "achievements", btn.dataset.id));
+        const snap = await getDoc(doc(db, "achievements", btn.dataset.id));
         if (!snap.exists()) return;
         const data = snap.data();
         document.getElementById("achievement-id").value = btn.dataset.id;
@@ -834,7 +837,7 @@
 
     document.querySelectorAll(".edit-event").forEach(btn => {
       btn.addEventListener("click", async () => {
-        const snap = await getDocs(doc(db, "events", btn.dataset.id));
+        const snap = await getDoc(doc(db, "events", btn.dataset.id));
         if (!snap.exists()) return;
         const data = snap.data();
         document.getElementById("event-id").value = btn.dataset.id;

@@ -25,10 +25,10 @@
 
 <!-- NAV -->
 <header class="fixed top-0 inset-x-0 z-50">
-  <div class="border-b border-[color:var(--border-line)]" style="background:rgba(5,8,20,0.85); backdrop-filter:blur(16px);">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between relative">
+  <div class="border-b border-[color:var(--border-line)]" style="background:rgba(5,8,20,0.82);backdrop-filter:blur(18px);">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
       <a href="index.html" class="flex items-center gap-3 shrink-0">
-        <img src="crest.png" alt="Webmasters Esports crest" class="h-11 w-11 object-contain">
+        <img src="crest.png" alt="Webmasters Esports crest" class="h-10 w-10 object-contain">
         <div class="leading-tight hidden sm:block">
           <p class="font-display text-sm tracking-wide text-white">WEBMASTERS</p>
           <p class="font-body text-[11px] tracking-[0.25em] text-[color:var(--cyan)]">ESPORTS BANILAD</p>
@@ -37,80 +37,92 @@
       <button id="mobile-menu-btn" class="md:hidden text-white p-2" aria-label="Open menu">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
       </button>
-      <nav id="nav-links" class="hidden md:flex items-center gap-9 font-body text-sm text-[color:var(--chrome)]">
-        <a href="index.html" class="hover:text-white transition-colors">Home</a>
-        <a href="teams.html" class="hover:text-white transition-colors">Teams</a>
-        <a href="matches.html" class="hover:text-white transition-colors">Matches</a>
-        <a href="news.html" class="hover:text-white transition-colors">News</a>
-        <a href="about.html" class="hover:text-white transition-colors">About Us</a>
+      <nav id="nav-links" class="hidden md:flex items-center gap-8 font-body text-sm">
+        <a href="index.html" class="nav-link">HOME</a>
+        <a href="teams.html" class="nav-link">TEAMS</a>
+        <a href="matches.html" class="nav-link active">MATCHES</a>
+        <a href="news.html" class="nav-link">NEWS</a>
+        <a href="about.html" class="nav-link">ABOUT</a>
       </nav>
-      <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="btn-primary font-display text-xs tracking-wide px-5 py-2.5 clip-角 hover:opacity-95 transition hidden md:inline-block">
-        JOIN DISCORD
-      </a>
+      <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="btn-primary font-display text-xs tracking-wide px-5 py-2.5 clip-∠ hover:opacity-95 transition hidden md:inline-block">JOIN DISCORD</a>
     </div>
     <div id="mobile-menu" class="hidden md:hidden border-t border-[color:var(--border-line)] px-6 py-4 space-y-3">
       <a href="index.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">Home</a>
       <a href="teams.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">Teams</a>
-      <a href="matches.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">Matches</a>
+      <a href="matches.html" class="block font-body text-sm font-medium text-white transition-colors">Matches</a>
       <a href="news.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">News</a>
-      <a href="about.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">About Us</a>
+      <a href="about.html" class="block font-body text-sm text-[color:var(--chrome)] hover:text-white transition-colors">About</a>
       <a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="block font-body text-sm text-[color:var(--cyan)] hover:text-white transition-colors">Join Discord</a>
     </div>
   </div>
 </header>
 
 <!-- MATCH CENTER -->
-<section id="schedule" class="relative py-24 px-6 lg:px-10 border-t border-[color:var(--border-line)]">
+<section id="schedule" class="relative pt-32 pb-24 px-6 lg:px-10">
   <div class="max-w-7xl mx-auto">
     <div class="text-center mb-12 reveal">
-      <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4">MATCH CENTER</h2>
-      <p class="font-body text-base text-[color:var(--chrome)] max-w-2xl mx-auto">Where and when to catch the Webmasters this month.</p>
+      <p class="font-display text-xs tracking-[0.3em] text-[color:var(--cyan)] uppercase mb-3">Fixtures</p>
+      <h1 class="font-display section-title font-black text-white mb-3">MATCH CENTER</h1>
+      <p class="font-body text-base text-[color:var(--body-text)] max-w-2xl mx-auto">Upcoming fixtures and results across Valorant and Mobile Legends: Bang Bang.</p>
     </div>
 
-    <div class="flex flex-wrap items-center justify-center gap-3 mb-10 reveal">
-      <button class="filter-btn active font-display text-xs tracking-wide px-5 py-2.5 clip-角 border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all" data-filter="all">ALL</button>
-      <button class="filter-btn font-display text-xs tracking-wide px-5 py-2.5 clip-角 border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all" data-filter="valorant">VALORANT</button>
-      <button class="filter-btn font-display text-xs tracking-wide px-5 py-2.5 clip-角 border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all" data-filter="mlbb">MLBB</button>
-      <button class="filter-btn font-display text-xs tracking-wide px-5 py-2.5 clip-角 border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all" data-filter="lol">LOL</button>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-center gap-3 mb-10 reveal reveal-delay-1">
+      <div class="font-display text-[10px] tracking-widest text-[color:var(--body-text)] uppercase">GAME</div>
+      <div class="flex flex-wrap gap-1.5">
+        <button class="filter-btn active font-display text-xs tracking-wide px-5 py-2.5 clip-∠ border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all" data-filter="all">ALL</button>
+        <button class="filter-btn font-display text-xs tracking-wide px-5 py-2.5 clip-∠ border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all" data-filter="valorant">VALORANT</button>
+        <button class="filter-btn font-display text-xs tracking-wide px-5 py-2.5 clip-∠ border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all" data-filter="mlbb">MLBB</button>
+      </div>
+      <div class="w-px h-6 bg-[color:var(--border-line)] sm:mx-2"></div>
+      <div class="font-display text-[10px] tracking-widest text-[color:var(--body-text)] uppercase">STATUS</div>
+      <div class="flex flex-wrap gap-1.5">
+        <button class="status-btn active font-display text-xs tracking-wide px-5 py-2.5 clip-∠ border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all" data-status="all">ALL</button>
+        <button class="status-btn font-display text-xs tracking-wide px-5 py-2.5 clip-∠ border border-[color:var(--border-line)] text-[color:var(--chrome)] hover:text-white hover:border-[color:var(--cyan)] transition-all" data-status="upcoming">UPCOMING</button>
+        <button class="status-btn font-display text-xs tracking-wide px-5 py-2.5 clip-∠ border border-red-400/30 text-red-400 hover:text-red-300 hover:border-red-400/60 transition-all" data-status="live">LIVE</button>
+        <button class="status-btn font-display text-xs tracking-wide px-5 py-2.5 clip-∠ border border-[color:var(--border-line)] text-[color:var(--body-text)] hover:text-white hover:border-[#c4d0dc]/50 transition-all" data-status="completed">COMPLETED</button>
+      </div>
     </div>
 
     <div id="schedule-list" class="space-y-4">
-      <p class="font-body text-sm text-center">Loading…</p>
+      <p class="font-body text-sm text-center reveal">Loading matches…</p>
     </div>
-
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer id="about" class="relative border-t border-[color:var(--border-line)] px-6 lg:px-10 pt-16 pb-8">
-  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
-    <div>
+<footer class="relative border-t border-[color:var(--border-line)] px-6 lg:px-10 pt-16 pb-8 mt-16">
+  <div class="absolute inset-0 pointer-events-none opacity-[0.035]">
+    <img src="crest.png" alt="" class="h-80 w-auto object-contain" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);filter:grayscale(1);">
+  </div>
+  <div class="absolute inset-0 pointer-events-none" style="background:rgba(5,8,20,0.6);"></div>
+  <div class="relative max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+    <div class="reveal">
       <div class="flex items-center gap-3 mb-4">
-        <img src="crest.png" alt="Webmasters Esports crest" class="h-9 w-9 object-contain">
+        <img src="crest.png" alt="Webmasters Esports crest" class="h-10 w-10 object-contain">
         <span class="font-display text-sm text-white tracking-wide">WEBMASTERS ESPORTS</span>
       </div>
-      <p class="font-body text-sm max-w-xs">The official esports organization of the University of Cebu – Banilad, formed under the Webmasters student body.</p>
+      <p class="font-body text-sm text-[color:var(--body-text)] max-w-xs">The official esports organization of the University of Cebu – Banilad. Competing across Valorant and Mobile Legends: Bang Bang.</p>
     </div>
-    <div>
-      <p class="font-display text-xs text-[color:var(--cyan)] tracking-wide mb-4">Navigate</p>
+    <div class="reveal reveal-delay-1">
+      <p class="font-display text-xs text-[color:var(--cyan)] tracking-wide mb-4">NAVIGATION</p>
       <ul class="font-body text-sm space-y-2.5">
         <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
         <li><a href="teams.html" class="hover:text-white transition-colors">Teams</a></li>
-        <li><a href="matches.html" class="hover:text-white transition-colors">Matches</a></li>
+        <li><a href="matches.html" class="font-medium text-white">Matches</a></li>
         <li><a href="news.html" class="hover:text-white transition-colors">News</a></li>
-        <li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li>
+        <li><a href="about.html" class="hover:text-white transition-colors">About</a></li>
       </ul>
     </div>
-    <div>
-      <p class="font-display text-xs text-[color:var(--cyan)] tracking-wide mb-4">Follow the Team</p>
+    <div class="reveal reveal-delay-2">
+      <p class="font-display text-xs text-[color:var(--cyan)] tracking-wide mb-4">FOLLOW</p>
       <ul class="font-body text-sm space-y-2.5">
         <li><a href="https://www.facebook.com/webmastersesports" target="_blank" rel="noopener" class="hover:text-white transition-colors">Facebook</a></li>
         <li><a href="https://discord.gg/kJvXfFTs8s" target="_blank" rel="noopener" class="hover:text-white transition-colors">Discord</a></li>
       </ul>
     </div>
   </div>
-  <div class="max-w-7xl mx-auto pt-6 border-t border-[color:var(--border-line)] flex flex-col sm:flex-row items-center justify-between gap-3 font-body text-xs text-[color:var(--chrome)]">
-    <p>© 2026 Webmasters Esports Banilad. University of Cebu – Banilad.</p>
+  <div class="relative max-w-7xl mx-auto pt-6 border-t border-[color:var(--border-line)] flex flex-col sm:flex-row items-center justify-between gap-3 font-body text-xs text-[color:var(--body-text)]">
+    <p>© 2026 Webmasters Esports Banilad · University of Cebu – Banilad.</p>
     <p>Built by the Webmasters student org.</p>
   </div>
 </footer>
@@ -124,103 +136,154 @@
   const db = getFirestore(app);
   const scheduleList = document.getElementById("schedule-list");
 
-  function getGameFilter(title) {
-    if (!title) return "all";
-    const t = title.toLowerCase();
-    if (t.includes("valorant")) return "valorant";
-    if (t.includes("mobile") || t.includes("mlbb")) return "mlbb";
-    if (t.includes("league") || t.includes("lol")) return "lol";
-    return "all";
-  }
-
-  async function loadSchedule(filter = "all") {
-    scheduleList.innerHTML = '<p class="font-body text-sm text-center">Loading…</p>';
-    try {
-      const q = query(collection(db, "matches"), orderBy("datetime", "asc"));
-      const snap = await getDocs(q);
-      scheduleList.innerHTML = "";
-      const filtered = snap.docs.filter(doc => {
-        const data = doc.data();
-        const gameFilter = getGameFilter(data.title);
-        return filter === "all" || gameFilter === filter;
-      });
-
-      if (filtered.length === 0) {
-        scheduleList.innerHTML = '<p class="font-body text-sm text-center">No matches found for this filter.</p>';
-        return;
-      }
-
-      filtered.forEach(doc => {
-        const { title, datetime, status, link, linkText } = doc.data();
-        const row = document.createElement("div");
-        const gameFilter = getGameFilter(title);
-        let statusClass = "";
-        if (status === "Live") statusClass = "match-live";
-        else if (status === "Upcoming") statusClass = "match-upcoming";
-        else if (status === "Finished") statusClass = "match-finished";
-
-        row.className = `match-card panel clip-角 p-5 md:p-6 ${statusClass} reveal`;
-        row.innerHTML = `
-          <div class="grid grid-cols-1 md:grid-cols-[140px_1fr_140px_auto] items-center gap-4">
-            <div class="font-body text-sm text-[color:var(--chrome)]">${formatDate(datetime)}</div>
-            <div class="font-display text-white text-sm md:text-base">${escapeHtml(title)}</div>
-            <div class="flex items-center gap-2 font-body text-xs">
-              ${statusDot(status)}
-              <span class="${statusColor(status)}">${escapeHtml(status)}</span>
-            </div>
-            <a href="${escapeHtml(link || "#")}" class="font-body text-xs text-[color:var(--cyan)] hover:text-white transition">${escapeHtml(linkText || "Link")} →</a>
-          </div>`;
-        scheduleList.appendChild(row);
-      });
-    } catch (err) {
-      console.error("Schedule failed to load:", err);
-      scheduleList.innerHTML = '<p class="font-body text-sm text-center">Couldn\'t load matches right now.</p>';
-    }
+  function escapeHtml(str) {
+    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
   }
 
   function formatDate(val) {
     if (!val) return "";
     const d = new Date(val);
     if (isNaN(d)) return val;
-    return d.toLocaleString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
+    return d.toLocaleString("en-US", { weekday: "short", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
   }
 
-  function escapeHtml(str) {
-    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  function getGameFilter(title) {
+    if (!title) return "all";
+    const t = title.toLowerCase();
+    if (t.includes("valorant")) return "valorant";
+    if (t.includes("mobile") || t.includes("mlbb")) return "mlbb";
+    return "all";
   }
 
-  function statusDot(status) {
-    const map = { "Live": "bg-red-500", "Upcoming": "bg-[color:var(--cyan)]", "Finished": "bg-[color:var(--chrome)]" };
-    const color = map[status] || "bg-[color:var(--chrome)]";
-    return `<span class="h-2 w-2 rounded-full ${color} status-dot"></span>`;
+  function gameLabel(key) {
+    return key === "valorant" ? "VALORANT" : key === "mlbb" ? "MLBB" : "ALL";
   }
 
-  function statusColor(status) {
-    const map = { "Live": "text-red-400", "Upcoming": "text-[color:var(--cyan)]", "Finished": "text-[color:var(--chrome)]" };
-    return map[status] || "text-[color:var(--chrome)]";
+  function getStatusKey(status) {
+    const s = (status || "Upcoming").toLowerCase();
+    if (s.includes("live")) return "live";
+    if (s.includes("finish") || s.includes("completed")) return "completed";
+    return "upcoming";
   }
 
-  loadSchedule();
+  function statusLabel(status) {
+    const k = getStatusKey(status);
+    return k === "upcoming" ? "UPCOMING" : k === "live" ? "LIVE" : "COMPLETED";
+  }
+
+  function parseOpponent(title) {
+    let t = title || "";
+    const lower = t.toLowerCase();
+    const sep = lower.includes(" vs ") ? " vs " : lower.includes(" v ") ? " v " : null;
+    if (!sep) return "TBD";
+    const parts = t.split(sep);
+    if (parts.length < 2) return "TBD";
+    let opp = parts.slice(1).join(sep).trim();
+    opp = opp.replace(/\s*[—–-]\s*.*$/i, "").trim();
+    return opp || "TBD";
+  }
+
+  function opponentBadge(name) {
+    return name.split(/\s+/).map(w => w[0]).join("").slice(0, 3).toUpperCase();
+  }
+
+  async function loadSchedule(gameFilter = "all", statusFilter = "all") {
+    scheduleList.innerHTML = '<p class="font-body text-sm text-center reveal">Loading matches…</p>';
+    try {
+      const q = query(collection(db, "matches"), orderBy("datetime", "asc"));
+      const snap = await getDocs(q);
+      const all = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+      const filtered = all.filter(doc => {
+        const gf = getGameFilter(doc.title);
+        const sf = getStatusKey(doc.status);
+        const gameOk = gameFilter === "all" || gf === gameFilter;
+        const statusOk = statusFilter === "all" || sf === statusFilter;
+        return gameOk && statusOk;
+      });
+
+      if (filtered.length === 0) {
+        scheduleList.innerHTML = `
+          <div class="panel clip-∠ p-10 text-center reveal">
+            <p class="font-display text-3xl md:text-4xl text-white mb-3">NO MATCHES FOUND</p>
+            <p class="font-body text-sm text-[color:var(--body-text)] max-w-md mx-auto">No fixtures match the current filters. Our competitive journey is just beginning — check back soon.</p>
+          </div>`;
+        return;
+      }
+
+      scheduleList.innerHTML = "";
+      filtered.forEach(doc => {
+        const { title, datetime, status, link, linkText } = doc;
+        const gameKey = getGameFilter(title);
+        const accent = gameKey === "valorant" ? "var(--accent-valorant)" : gameKey === "mlbb" ? "var(--accent-mlbb)" : "var(--cyan)";
+        const opp = parseOpponent(title);
+        const badge = opponentBadge(opp);
+        const sKey = getStatusKey(status);
+        const statusCl = sKey === "live" ? "match-live" : sKey === "upcoming" ? "match-upcoming" : "match-finished";
+        const isLive = sKey === "live";
+
+        const row = document.createElement("div");
+        row.className = `match-card panel clip-∠ p-5 md:p-6 ${statusCl} reveal`;
+        row.innerHTML = `
+          <div class="grid grid-cols-1 md:grid-cols-[120px_1fr_120px_auto] items-center gap-5 md:gap-6">
+            <div class="flex flex-col items-center gap-1.5">
+              <img src="crest.png" alt="Webmasters" class="h-12 w-12 object-contain crest-glow">
+              <span class="font-display text-xs text-white text-center leading-tight">WEBMASTERS</span>
+            </div>
+            <div class="flex items-center justify-center">
+              <div class="flex items-center gap-3 font-display text-xs text-[color:var(--body-text)] tracking-widest">
+                <span class="w-10 h-10 rounded-full bg-gradient-to-br from-[#0f2540] to-[#132c4e] border border-[color:var(--border-line)] flex items-center justify-center text-[color:var(--cyan)] font-bold">WM</span>
+                <span class="${isLive ? "text-red-400 animate-pulse" : "text-[color:var(--body-text)]"}">VS</span>
+                <span class="w-10 h-10 rounded-full bg-gradient-to-br from-[#1a080a] to-[#2a1010] border border-[color:var(--border-line)] flex items-center justify-center text-[color:${accent}] font-bold">${badge}</span>
+              </div>
+            </div>
+            <div class="flex flex-col items-center gap-1.5">
+              <span class="font-display text-lg md:text-xl font-bold text-white text-center">${escapeHtml(opp)}</span>
+              <span class="font-display text-[10px] px-2.5 py-1 rounded-sm border border-[color:var(--border-line)]" style="color:${accent}">${gameLabel(gameKey)}</span>
+            </div>
+            <div class="flex flex-col gap-2 items-end">
+              <span class="font-body text-[10px] text-[color:var(--body-text)]">${formatDate(datetime)}</span>
+              <span class="font-display text-[10px] px-2.5 py-1 rounded-sm ${sKey === "live" ? "bg-red-500/15 text-red-400" : sKey === "upcoming" ? "bg-cyan-500/10 text-[color:var(--cyan)]" : "bg-[#4dcdf3]/10 text-[color:var(--body-text)]"}">${statusLabel(status)}</span>
+              ${link ? `<a href="${escapeHtml(link)}" target="_blank" rel="noopener" class="font-body text-xs text-[color:var(--cyan)] hover:text-white transition whitespace-nowrap">${escapeHtml(linkText || "Watch →")} →</a>` : `<span class="font-body text-xs text-[color:var(--body-text)]">—</span>`}
+            </div>
+          </div>
+        `;
+        scheduleList.appendChild(row);
+      });
+    } catch (err) {
+      console.error("Schedule failed to load:", err);
+      scheduleList.innerHTML = '<p class="font-body text-sm text-center reveal">Couldn\'t load matches right now.</p>';
+    }
+  }
+
+  let activeGame = "all";
+  let activeStatus = "all";
+
+  function refresh() {
+    loadSchedule(activeGame, activeStatus);
+  }
 
   document.querySelectorAll(".filter-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active", "border-[color:var(--cyan)]", "text-white"));
-      btn.classList.add("active", "border-[color:var(--cyan)]", "text-white");
-      loadSchedule(btn.dataset.filter);
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeGame = btn.dataset.filter;
+      refresh();
     });
   });
 
-  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-  const mobileMenu = document.getElementById("mobile-menu");
-  mobileMenuBtn.addEventListener("click", () => {
-    mobileMenu.classList.toggle("hidden");
+  document.querySelectorAll(".status-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".status-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      activeStatus = btn.dataset.status;
+      refresh();
+    });
   });
-  document.querySelectorAll("#mobile-menu a").forEach(link => {
-    link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
-  });
+
+  loadSchedule();
 </script>
 
 <script src="main.js"></script>
-
 </body>
 </html>
